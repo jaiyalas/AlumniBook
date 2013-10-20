@@ -30,10 +30,16 @@ AlumniBook - for SDM 2013 @ NTU.
 
 ## Members
 
+confirmed **collaborators**
+
+  * 李奕德(B99705021) : teddywinglee@gmail.com
+  * 郭瀚智(R02725023) : ejic045440@gmail.com
+  * 郗昀彥(R00725051) : r00725051@ntu.edu.tw
+
+waiting for response...
+
   * 張凱涵(B00705027) : rasca0027@gmail.com
   * 施淮振(B00705047) : shih820517@gmail.com
-  * 李奕德(B99705021) : teddywinglee@gmail.com
   * 倪嘉銘(T02705102) : oscarnjm@gmail.com
-  * 郭瀚智(R02725023) : ejic045440@gmail.com
   * 鄭立民(R02725041)  : limin6942@gmail.com
-  * 郗昀彥(R00725051) : r00725051@ntu.edu.tw
+
