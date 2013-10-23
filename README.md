@@ -35,5 +35,5 @@ AlumniBook - for SDM 2013 @ NTU.
   * 李奕德(B99705021) : teddywinglee@gmail.com
   * 郗昀彥(R00725051) : r00725051@ntu.edu.tw
   * 郭瀚智(R02725023) : ejic045440@gmail.com
-  * 鄭立民(R02725041)  : limin6942@gmail.com
+  * 鄭立民(R02725041) : limin6942@gmail.com
   * 倪嘉銘(T02705102) : oscarnjm@gmail.com
