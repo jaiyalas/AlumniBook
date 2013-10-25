@@ -1,0 +1,20 @@
+<div ng-include="'./javascripts/templates/partials/navbarHeader.html'"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="page-header">
+                <h4>Topic List</h4>
+            </div>
+
+            <div class="list-group">
+              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics">
+                <h5 class="list-group-item-heading">{{topic.title}}</h5>
+                <span class="label label-info pull-right">{{topic.comments_count}}</span>
+                <p class="list-group-item-text">{{topic.content}}</p>
+                <p class="list-group-item-text text-info"><small>by {{topic.authorname}}</small></p>
+              </a>
+            </div>
+        </div>
+    </div>
+</div>

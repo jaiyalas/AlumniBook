@@ -1,0 +1,22 @@
+{
+  "name": "sdm-r02725023",
+  "version": "0.0.1",
+  "description": "SDM 2013 Web",
+  "dependencies": {
+    "jquery": ">=2.0.3",
+    "angular": "*",
+    "angular-route": "*",
+    "angular-cookies": "*",
+    "angular-animate": "*",
+    "angular-ui-utils": ">=0.0.4",
+    "angular-bootstrap": ">=0.6.0",
+    "angular-easyfb": "*",
+    "angular-loading-bar": "*",
+    "bootstrap": ">=3.0.0",
+    "jquery.lazyload": ">=1.8.5",
+    "magnific-popup": ">=0.9.5",
+    "jquery.nailthumb": "https://github.com/garralab/NailThumb.git",
+    "ng-tags-input": "*",
+    "Ladda": "*"
+  }
+}

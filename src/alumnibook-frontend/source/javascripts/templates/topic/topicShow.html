@@ -1,0 +1,31 @@
+<div ng-include="'./javascripts/templates/partials/navbarHeader.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="page-header">
+                <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby {{topic.authorname}}</small></h4>
+            </div>
+            <p class="show-topic-content">{{topic.content}}</p>
+            <p>{{topic.created_at}}</p>
+
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <ul class="list-group">
+                  <li class="list-group-item" ng-repeat="comment in topic.comments">
+                    <p>{{comment.comment}}</p>
+                    <p class="text-muted text-right">{{comment.authorname}}</p>
+                </li>
+                </ul>
+              </div>
+              <div class="panel-footer">
+                <input type="text" class="form-control" placeholder="Name" ng-model="comment.authorname">
+                <textarea class="form-control comment-area" rows="3" ng-model="comment.comment" placeholder="Comment..."></textarea>
+
+                <div class="btn btn-primary ladda-button" data-style="expand-right" id="create-comment-submit" ladda data-ng-model="loading" ng-click="submitComment()"><span class="ladda-label">Submit</span></div>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>

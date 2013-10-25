@@ -1,0 +1,38 @@
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container">
+      <div class="navbar-header">
+        <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button> -->
+        <a class="navbar-brand" ng-href="{{linkRoot}}">AlumniBook</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#/topics/create">Create Topic</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right qu-nav" ng-switch on="currentUser.isLogged">
+        <!-- <li class="" ng-switch-when="true"><a href="#"><span class="glyphicon glyphicon-list-alt"></span> Lists</a></li>
+        <li class="" ng-switch-when="true"><a href="/messages"><span class="glyphicon glyphicon-comment"></span> Messages</a></li>
+        <li class="" ng-switch-when="true"><a ng-href="/products/create"><span class="glyphicon glyphicon-plus"></span> Create</a></li> -->
+        <li class="dropdown" ng-switch-when="true">
+          <a href="#" class="dropdown-toggle qu-dropdown" data-toggle="dropdown"> Me <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" ng-click="getUser()"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Setting</a></li>
+            <li><a ng-href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+          </ul>
+          
+        </li>
+        <li ng-switch-when="false">
+            <a ng-href="#/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+        </li>
+        <li ng-switch-default>
+          <a ng-href="#" ng-click=""></a>
+        </li>
+      </ul>
+  </div>
+</nav>

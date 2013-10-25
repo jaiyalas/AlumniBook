@@ -1,0 +1,14 @@
+{
+  "name": "jquery.nailthumb",
+  "homepage": "https://github.com/garralab/NailThumb",
+  "version": "1.1.0",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "54e634eefc140ff823bbae7d320e800f840498fa"
+  },
+  "_source": "https://github.com/garralab/NailThumb.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/garralab/NailThumb.git"
+}

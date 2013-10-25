@@ -1,0 +1,20 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,300italic,400italic);
+
+body {
+  font-family: 'Roboto','Helvetica Light', 'Helvetica', Arial, sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.8px;
+}
+
+h1, h2, h3, h4, label, input {
+  font-family: 'Roboto', sans-serif;
+  /*font-weight: 100;*/
+}
+
+.show-topic-content {
+    margin-bottom: 100px;
+}
+
+.comment-area {
+    margin: 10px 0 10px 0;
+}
