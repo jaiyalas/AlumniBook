@@ -49,6 +49,24 @@ app.config(function ($locationProvider, $routeProvider) {
         templateUrl: './javascripts/templates/user/userSignup.html',
         controller: 'UserSignupController'
     })
+    .when('/users/edit', {
+        templateUrl: './javascripts/templates/user/userEdit.html',
+        controller: 'UserEditController',
+        resolve: {
+            currentUser: function($location, userAuthFactory){
+                if(!userAuthFactory.currentUser().isLogged){
+                    $location.path('users/login');
+                }
+                else{
+                    return userAuthFactory.currentUser();
+                }
+            }
+        }
+    })
+    .when('/users/:id', {
+        templateUrl: './javascripts/templates/user/userProfile.html',
+        controller: 'UserProfileController'
+    })
     .otherwise({
         template: "This doesn't exist!"
     });

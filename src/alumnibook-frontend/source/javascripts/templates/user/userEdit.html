@@ -1,0 +1,108 @@
+<div ng-include="'./javascripts/templates/partials/navbarHeader.html'"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="page-header">
+                <h3 class="text-right">Edit your profile<small></small></h3>
+            </div>
+
+            <div class="alert alert-danger" ng-show="error.message">{{error.message}}</div>
+
+
+            <form role="form" ng-submit="submit()">
+              
+              <legend><h4 class="text-right">Public Information</h4></legend>
+              
+              <div class="form-group">
+                <label>ID</label>
+                <input type="text" class="form-control" ng-model="user.main_id" placeholder="Your id" disabled>
+              </div>      
+              
+              <div class="form-group">
+                <label>Secondary ID </label>
+                <div class="btn btn-info btn-sm pull-right" ng-click="switchId()"> switch to main ID </div>
+                <input type="text" class="form-control" ng-model="user.second_id">
+              </div>
+              
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" ng-model="user.email">
+              </div>
+
+              <div class="form-group">
+                <label>User name</label>
+                <input type="text" class="form-control" ng-model="user.username">
+              </div>
+            
+
+            
+              <legend><h4 class="text-right">Private Profile</h4></legend>
+              <div class="form-group">
+                <label>First name (名)</label>
+                <input type="text" class="form-control" ng-model="user.profile.first_name">
+              </div>
+              <div class="form-group">
+                <label>Last name (姓)</label>
+                <input type="text" class="form-control" ng-model="user.profile.last_name">
+              </div>
+              <div class="form-group">
+                <label>Phone number</label>
+                <input type="text" class="form-control" ng-model="user.profile.phone">
+              </div>
+              <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" ng-model="user.profile.location">
+              </div>
+              <div class="form-group">
+                <label>Postal address</label>
+                <input type="text" class="form-control" ng-model="user.profile.address">
+              </div>
+            
+
+            
+              <div class="page-header">
+                <h4 class="text-right">Experience & Career</h4>
+              </div>
+
+              <legend>工作與經驗 
+                <div class="btn btn-info btn-sm pull-right" ng-click="addCareer()">
+                  <span class="glyphicon glyphicon-plus"></span>  新增 
+                </div>
+              </legend>
+              <div class="form-horizontal" ng-repeat="career in user.careers">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">組織 : </label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control input-sm" ng-model="career.organization">
+                  </div>
+                  <label class="col-lg-2 control-label">擔任 : </label>
+                  <div class="col-lg-10">
+                    <input type="text" class="form-control input-sm" ng-model="career.title">
+                  </div>
+                  <label class="col-lg-2 control-label">簡述 : </label>
+                  <div class="col-lg-10">
+                    <textarea class="form-control input-sm" rows="2" ng-model="career.description"></textarea>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label>Autobiography</label>
+                <textarea class="form-control" rows="5" ng-model="user.autobiography"></textarea>
+              </div>
+
+              
+
+
+              <button type="submit" class="btn btn-primary ladda-button pull-right" data-style="expand-right" id="save-submit" ladda data-ng-model="loading"><span class="ladda-label"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'./javascripts/templates/partials/navbarFooter.html'"></div>

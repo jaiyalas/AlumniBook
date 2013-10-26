@@ -26,7 +26,7 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, cfpL
     $scope.updateTopic();
 
     $scope.submitComment = function(){
-        if($scope.comment.authorname && $scope.comment.comment){
+        if($scope.comment.comment){
             $scope.loading = true;
 
             $http({
@@ -34,9 +34,9 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, cfpL
                 url: $scope.apiRoot+'/api/comments',
                 data: {
                     topic_id: $scope.topicId,
-                    authorname: $scope.comment.authorname,
                     comment: $scope.comment.comment
                 },
+                withCredentials: true,
             }).then(function(response){
                 console.log(response);
                 cfpLoadingBar.inc();
@@ -67,8 +67,8 @@ app.controller('TopicCreateController', function($scope, $routeParams, $http, $l
             headers: {
                 'Content-Type': 'application/json'
             },
+            withCredentials: true,
             data: {
-                authorname: $scope.topic.authorname,
                 title: $scope.topic.title,
                 content: $scope.topic.content
             }
@@ -145,7 +145,7 @@ app.controller('UserSignupController', function($scope, $http, $location, userAu
             console.log(response);
             $scope.loading = false;
             userAuthFactory.login(response);
-            $location.path($scope.linkRoot);
+            $location.path('/users/edit');
 
         }).error(function(response){
             console.log(response);
@@ -153,6 +153,90 @@ app.controller('UserSignupController', function($scope, $http, $location, userAu
             $scope.loading = false;
         });
     }
+
+});
+
+
+app.controller('UserProfileController', function($scope, $http, $location, $routeParams, userAuthFactory){
+    $scope.currentUser = userAuthFactory.currentUser();
+    console.log($routeParams['id'])
+    $scope.userId = $routeParams['id'];
+    $scope.error = {};
+
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/profile/'+$scope.userId,
+        withCredentials: true
+    }).success(function(response){
+        console.log(response);
+        $scope.profile = response;
+    }).error(function(response){
+        console.log(response);
+        if(response.message)
+            $scope.error.message = response.message;
+        if(response.error)
+            $scope.error.message = response.error;
+    });
+});
+
+app.controller('UserEditController', function($scope, $http, $location, $routeParams, userAuthFactory){
+    $scope.currentUser = userAuthFactory.currentUser();
+    $scope.user = userAuthFactory.currentUser().data;
+    $scope.user.profile = {}
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/profile/'+$scope.user.main_id,
+        withCredentials: true
+    }).success(function(response){
+        $scope.user = response;
+        if(!$scope.user.careers){
+            $scope.user.careers = [{}];
+        }
+    })
+
+
+    
+    
+
+    $scope.switchId = function(){
+        if($scope.user.second_id){
+            var temp_id = $scope.user.main_id;
+            $scope.user.main_id = $scope.user.second_id;
+            $scope.user.second_id = temp_id;
+        }
+    }
+
+    $scope.addCareer = function(){
+        $scope.user.careers.push({});
+    }
+
+    $scope.submit = function(){
+        console.log('submit');
+        $scope.error = {};
+        $scope.loading = true;
+
+        // if there is no careers
+        if($scope.user.careers.length == 1 && !$scope.user.careers[0].organization){
+            delete $scope.user['careers'];
+        }
+
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/users/profile',
+            data: {user: $scope.user},
+            withCredentials: true
+        }).success(function(response){
+            console.log(response);
+            $scope.loading = false;
+            $location.path('/users/'+response.main_id);
+        }).error(function(response){
+            console.log(response);
+            $scope.error.message = response.message;
+            $scope.loading = false;
+        });
+
+    }
+    
 
 });
 

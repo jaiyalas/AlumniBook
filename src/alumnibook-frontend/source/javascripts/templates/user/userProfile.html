@@ -1,0 +1,49 @@
+<div ng-include="'./javascripts/templates/partials/navbarHeader.html'"></div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <div class="page-header">
+                <h3 ng-if="profile.username">{{profile.username}}<small> {{profile.main_id}}</small>
+                  <a href="#/users/edit" class="btn btn-info btn-sm pull-right" ng-if="currentUser.data.main_id == profile.main_id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                </h3>
+                <h3 ng-if="!profile.username">{{profile.main_id}}<small></small>
+                  <a href="#/users/edit" class="btn btn-info btn-sm pull-right" ng-if="currentUser.data.main_id == profile.main_id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                </h3>
+            </div>
+
+            <div class="alert alert-danger" ng-show="error.message">{{error.message}}</div>
+            
+            <p><strong>Email : </strong> {{profile.email}}</p>
+
+            <div class="page-header" ng-show="profile.profile">
+                <h4 class="text-right">Personal profile</h4>
+            </div>
+            <p ng-show="profile.profile.first_name"><strong>Name : </strong> {{profile.profile.first_name}} {{profile.profile.last_name}}</p>
+            <p ng-show="profile.profile.phone"><strong>Phone number : </strong> {{profile.profile.phone}}</p>
+            <p ng-show="profile.profile.location"><strong>Location : </strong> {{profile.profile.location}}</p>
+            <p ng-show="profile.profile.address"><strong>Address : </strong> {{profile.profile.address}}</p>
+
+
+            <div class="page-header" ng-show="profile.careers">
+                <h4 class="text-right">Experience & Career</h4>
+            </div>
+
+            <blockquote ng-repeat="career in profile.careers">
+              <p ng-show="career.organization"><strong>{{career.organization}}</strong></p>
+              <p ng-show="career.title">as  <strong>{{career.title}}</strong></p>
+              <small ng-show="career.description">{{career.description}}</small>
+            </blockquote>
+
+            <div class="page-header" ng-show="profile.careers">
+                <h4 class="text-right">Autobiography</h4>
+            </div>
+            <p>{{profile.autobiography}}</p>
+
+        </div>
+    </div>
+</div>
+
+<div ng-include="'./javascripts/templates/partials/navbarFooter.html'"></div>

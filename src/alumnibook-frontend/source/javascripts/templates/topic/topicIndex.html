@@ -1,8 +1,7 @@
 <div ng-include="'./javascripts/templates/partials/navbarHeader.html'"></div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
+        <div class="col-md-8">
             <div class="page-header">
                 <h4>Topic List</h4>
             </div>
@@ -12,8 +11,14 @@
                 <h5 class="list-group-item-heading">{{topic.title}}</h5>
                 <span class="label label-info pull-right">{{topic.comments_count}}</span>
                 <p class="list-group-item-text">{{topic.content}}</p>
-                <p class="list-group-item-text text-info"><small>by {{topic.authorname}}</small></p>
+                <p class="list-group-item-text text-info"><small>by {{topic.user.main_id}}</small></p>
               </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="page-header">
+                <h4>Popular Topic</h4>
             </div>
         </div>
     </div>
