@@ -2,9 +2,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-1">
             <div class="page-header">
-                <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></h4>
+                <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}"><strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></a></h4>
             </div>
             <p class="show-topic-content">{{topic.content}}</p>
             <p>{{topic.created_at}}</p>
@@ -14,7 +14,7 @@
                 <ul class="list-group">
                   <li class="list-group-item" ng-repeat="comment in topic.comments">
                     <p>{{comment.comment}}</p>
-                    <p class="text-muted text-right"><strong ng-show="comment.user.username">{{comment.user.username}} - </strong>{{comment.user.main_id}}</p>
+                    <p class="text-muted text-right"><a ng-href="#/users/{{comment.user.main_id}}"><strong ng-show="comment.user.username">{{comment.user.username}} - </strong>{{comment.user.main_id}}</a></p>
                 </li>
                 </ul>
               </div>

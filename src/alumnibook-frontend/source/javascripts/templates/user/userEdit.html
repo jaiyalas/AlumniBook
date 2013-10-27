@@ -3,8 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
+        <div class="col-md-8 col-md-offset-1">
             <div class="page-header">
                 <h3 class="text-right">Edit your profile<small></small></h3>
             </div>
@@ -16,26 +15,33 @@
               
               <legend><h4 class="text-right">Public Information</h4></legend>
               
-              <div class="form-group">
-                <label>ID</label>
-                <input type="text" class="form-control" ng-model="user.main_id" placeholder="Your id" disabled>
-              </div>      
-              
-              <div class="form-group">
-                <label>Secondary ID </label>
-                <div class="btn btn-info btn-sm pull-right" ng-click="switchId()"> switch to main ID </div>
-                <input type="text" class="form-control" ng-model="user.second_id">
-              </div>
-              
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" class="form-control" ng-model="user.main_id" placeholder="Your id" disabled>
+                  </div>      
+                  
+                  <div class="form-group">
+                    <label>Secondary ID </label>
+                    <div class="btn btn-info btn-sm pull-right" ng-click="switchId()"> switch to main ID </div>
+                    <input type="text" class="form-control" ng-model="user.second_id">
+                  </div>
+                  
 
-              <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" ng-model="user.email">
-              </div>
+                  <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" ng-model="user.email">
+                  </div>
 
-              <div class="form-group">
-                <label>User name</label>
-                <input type="text" class="form-control" ng-model="user.username">
+                  <div class="form-group">
+                    <label>User name</label>
+                    <input type="text" class="form-control" ng-model="user.username">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <legend><h5 class="text-right"><span class="glyphicon glyphicon-camera"></span> Upload Avatar</h5></legend>
+                </div>
               </div>
             
 

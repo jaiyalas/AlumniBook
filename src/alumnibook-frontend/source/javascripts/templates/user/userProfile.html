@@ -3,15 +3,25 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2" ng-show="profile">
+        <div class="col-md-8 col-md-offset-1" ng-show="profile">
 
             <div class="page-header">
                 <h3 ng-if="profile.username">{{profile.username}}<small> {{profile.main_id}}</small>
-                  <a href="#/users/edit" class="btn btn-info btn-sm pull-right" ng-if="currentUser.data.main_id == profile.main_id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small>
+                    <p class="text-right">
+                        <a href="#/users/edit" class="btn btn-info btn-sm" ng-if="currentUser.data.id == profile.id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    </p>
                 </h3>
                 <h3 ng-if="!profile.username">{{profile.main_id}}<small></small>
-                  <a href="#/users/edit" class="btn btn-info btn-sm pull-right" ng-if="currentUser.data.main_id == profile.main_id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    <small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small>
+                    <p class="text-right">
+                        <a href="#/users/edit" class="btn btn-info btn-sm" ng-if="currentUser.data.id == profile.id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                    </p>
                 </h3>
+                <div ng-if="profile.current_user_following != null">
+                    <div class="btn btn-success btn-sm" ng-if="profile.current_user_following == false" ng-click="follow()">follow</div>
+                    <div class="btn btn-default btn-sm" ng-if="profile.current_user_following == true" ng-click="unfollow()">unfollow</div>
+                </div>
             </div>
 
             <div class="alert alert-danger" ng-show="error.message">{{error.message}}</div>

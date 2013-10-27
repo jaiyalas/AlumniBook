@@ -180,6 +180,44 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
         if(response.error)
             $scope.error.message = response.error;
     });
+
+
+    $scope.follow = function(){
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/users/follow',
+            data: {user_id: $scope.profile.id},
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response);
+            $scope.profile = response;
+            // $scope.loading = false;
+        }).error(function(response){
+            console.log(response);
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
+        });
+    };
+
+    $scope.unfollow = function(){
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/users/unfollow',
+            data: {user_id: $scope.profile.id},
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response);
+            $scope.profile = response;
+        }).error(function(response){
+            console.log(response);
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
+        });
+    };
 });
 
 app.controller('UserEditController', function($scope, $http, $location, $routeParams, userAuthFactory){
@@ -198,9 +236,6 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
         }
     })
 
-
-    
-    
 
     $scope.switchId = function(){
         if($scope.user.second_id){
@@ -233,7 +268,7 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
         }).success(function(response){
             console.log(response);
             $scope.loading = false;
-            $location.path('/users/'+response.main_id);
+            $location.path('/users/'+userAuthFactory.currentUser().data.main_id);
         }).error(function(response){
             console.log(response);
             $scope.error.message = response.message;
