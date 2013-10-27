@@ -37,6 +37,7 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, cfpL
                     comment: $scope.comment.comment
                 },
                 withCredentials: true,
+                headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
             }).then(function(response){
                 console.log(response);
                 cfpLoadingBar.inc();
@@ -68,6 +69,7 @@ app.controller('TopicCreateController', function($scope, $routeParams, $http, $l
                 'Content-Type': 'application/json'
             },
             withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id},
             data: {
                 title: $scope.topic.title,
                 content: $scope.topic.content
@@ -106,7 +108,7 @@ app.controller('UserLoginController', function($scope, $http, $location, userAut
             console.log(response);
             $scope.loading = false;
             userAuthFactory.login(response);
-            $location.path($scope.linkRoot);
+            $location.path('/');
         }).error(function(response){
             console.log(response);
             $scope.error.message = response.message;
@@ -166,7 +168,8 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
     $http({
         method: 'GET',
         url: $scope.apiRoot+'/api/users/profile/'+$scope.userId,
-        withCredentials: true
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
     }).success(function(response){
         console.log(response);
         $scope.profile = response;
@@ -186,7 +189,8 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
     $http({
         method: 'GET',
         url: $scope.apiRoot+'/api/users/profile/'+$scope.user.main_id,
-        withCredentials: true
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
     }).success(function(response){
         $scope.user = response;
         if(!$scope.user.careers){
@@ -224,7 +228,8 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
             method: 'POST',
             url: $scope.apiRoot+'/api/users/profile',
             data: {user: $scope.user},
-            withCredentials: true
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
         }).success(function(response){
             console.log(response);
             $scope.loading = false;

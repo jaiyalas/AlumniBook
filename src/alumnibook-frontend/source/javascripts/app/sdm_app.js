@@ -10,6 +10,7 @@ $(document).on('ready page:load page:change', function() {
 
 app.config(function($httpProvider) {
     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
 });
 // app.config(['$sceDelegateProvider', function($sceDelegateProvider) {
 //      $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:3000/**', 'http://localhost:3000/*']);
