@@ -18,6 +18,7 @@
 | ch1_attemp.txt | 專案背景及目的 | 李奕德 | github | ./doc/ch123/ |
 | ch2_attemp.txt | 專案假設及限制 | 李奕德 | github | ./doc/ch123/ |
 | ch3_attemp.txt | 專案範圍 | 李奕德 | github | ./doc/ch123/ |
+| document.docx | 文件整合 | 施淮振 | github | ./doc/integrated/ |
 
 
 ### 程式碼管理
