@@ -25,7 +25,7 @@
 
 | *<檔案名稱>*  | *<簡述>* | *<維護人>* | *<存放位置>* | *<存放目錄>* |  
 | ------------ | ------------- | ------------- | ------------ | ------------- | 
-| ???.code | oo功能 | 負責人某某 | github | /AlumniBook/src/  |
-| ???.code | oo功能 | 負責人某某 | github | /AlumniBook/src/  | 
+| server.code | api server功能 | 郭瀚志 | github | /AlumniBook/src/  |
+| web.code | 前端網頁功能 | 郭瀚志 | github | /AlumniBook/src/alumnibook-frontend  | 
 
 
