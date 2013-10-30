@@ -41,12 +41,16 @@
                 </div>
                 <div class="col-md-4">
                   <legend><h5 class="text-right"><span class="glyphicon glyphicon-camera"></span> Upload Avatar</h5></legend>
+                  <div class="dropzone" id="file-dropzone" drop-zone></div>
+                  <div class="user-avatar-wrapper" ng-show="user.avatar">
+                    <img src="{{apiRoot+user.avatar}}" class="img-user-avatar img-thumbnail">
+                  </div>
                 </div>
               </div>
             
 
             
-              <legend><h4 class="text-right">Private Profile</h4></legend>
+              <div class="page-header"><h4 class="text-right">Personal Profile</h4></div>
               <div class="form-group">
                 <label>First name (名)</label>
                 <input type="text" class="form-control" ng-model="user.profile.first_name">

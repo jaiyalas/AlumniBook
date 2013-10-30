@@ -183,6 +183,7 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
 
 
     $scope.follow = function(){
+        $scope.loading = true;
         $http({
             method: 'POST',
             url: $scope.apiRoot+'/api/users/follow',
@@ -191,9 +192,11 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
         }).success(function(response){
             console.log(response);
             $scope.profile = response;
+            $scope.loading = false;
             // $scope.loading = false;
         }).error(function(response){
             console.log(response);
+            $scope.loading = false;
             if(response.message)
                 $scope.error.message = response.message;
             if(response.error)
@@ -202,6 +205,7 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
     };
 
     $scope.unfollow = function(){
+        $scope.loading = true;
         $http({
             method: 'POST',
             url: $scope.apiRoot+'/api/users/unfollow',
@@ -209,9 +213,11 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
             headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
         }).success(function(response){
             console.log(response);
+            $scope.loading = false;
             $scope.profile = response;
         }).error(function(response){
             console.log(response);
+            $scope.loading = false;
             if(response.message)
                 $scope.error.message = response.message;
             if(response.error)
@@ -223,7 +229,8 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
 app.controller('UserEditController', function($scope, $http, $location, $routeParams, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
     $scope.user = userAuthFactory.currentUser().data;
-    $scope.user.profile = {}
+    $scope.user.profile = {};
+    $scope.error = {};
     $http({
         method: 'GET',
         url: $scope.apiRoot+'/api/users/profile/'+$scope.user.main_id,
@@ -234,6 +241,7 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
         if(!$scope.user.careers){
             $scope.user.careers = [{}];
         }
+        console.log($scope.user);
     })
 
 
@@ -251,7 +259,6 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
 
     $scope.submit = function(){
         console.log('submit');
-        $scope.error = {};
         $scope.loading = true;
 
         // if there is no careers

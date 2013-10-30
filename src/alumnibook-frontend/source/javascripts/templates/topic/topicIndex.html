@@ -8,10 +8,16 @@
 
             <div class="list-group">
               <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics">
-                <h5 class="list-group-item-heading">{{topic.title}}</h5>
-                <span class="label label-info pull-right">{{topic.comments_count}}</span>
-                <p class="list-group-item-text">{{topic.content}}</p>
-                <p class="list-group-item-text text-info"><small>by {{topic.user.main_id}}</small></p>
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4 class="list-group-item-heading">{{topic.title}}</h4>
+                        <p class="list-group-item-text text-info text-right"><small>by {{topic.user.main_id}}</small></p>
+                        <p class="list-group-item-text">{{topic.content}}</p>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="label label-info pull-right">{{topic.comments_count}}</span>
+                    </div>
+                </div>
               </a>
             </div>
         </div>

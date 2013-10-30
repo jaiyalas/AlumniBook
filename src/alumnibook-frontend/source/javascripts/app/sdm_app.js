@@ -163,24 +163,91 @@ app.run(function($rootScope, $http, $location, userAuthFactory, $cookies){
     };
 
     $rootScope.getUser = function() {
-        
+    };
+
+    $rootScope.avatarUrl = function(url){
+        var avatarUrl = $rootScope.apiRoot+url;
+        return avatarUrl; 
+    }
+});
+
+
+app.directive('dropZone', function() {
+    return {
+        restrict: 'A',
+        // scope: true,
+        link: function(scope, element, attrs) {
+            element.dropzone({ 
+                url: scope.apiRoot+"/api/users/profile/avatar",
+                maxFilesize: 5,
+                paramName: "avatar",
+                maxThumbnailFilesize: 5,
+                headers: {
+                    'Authorization': 'Bearer ' + scope.currentUser.data.id   
+                },
+                maxFiles: 1,
+                addRemoveLinks: false,
+                init: function() {
+                    this.on("addedfile", function(file) { 
+                        console.log('add file');
+                        console.log(file);
+                    });
+
+                    // this.on("removedfile", function(file){
+                    //     console.log('remove file');
+                    //     for(var i=0; i<scope.product.images.length; i++){
+                    //         if(scope.product.images[i].file == file){
+                    //             scope.product.images.splice(i, 1);
+                    //             scope.$apply();
+                    //             break;
+                    //         }
+                    //     }
+                    // });
+
+                    this.on("success", function(file, response){
+                        console.log('success');
+                        console.log(response);
+                        scope.user = response;
+                        scope.$apply();
+                        this.removeAllFiles();
+                        // response.file = file;
+                        // scope.product.images.push(response);
+                        // scope.$apply();
+                    });
+
+                    this.on("error", function(file, response){
+                        console.log('error');
+                        console.log(response);
+                        scope.error.message = response;
+                        scope.$apply();
+                    });
+
+                    this.on("maxfilesexceeded", function(file) {
+                        this.removeFile(file);
+                        // this.removeAllFiles();
+                        // this.addFile(file);
+                    });
+                }
+            });
+        }
     };
 });
 
-// app.value('uiJqConfig', {
-//     // The Tooltip namespace
-//     magnificPopup: {
-//         delegate: 'a',
-//         type: 'image',
-//         gallery: {enabled: true}
-//     },
-//     nailthumb: {
-//     },
-//     tagsInput: {
-//         'height':'100px',
-//         'width':'500px'
-//     }
-// });
+app.value('uiJqConfig', {
+    backstretch: {}
+    // The Tooltip namespace
+    // magnificPopup: {
+    //     delegate: 'a',
+    //     type: 'image',
+    //     gallery: {enabled: true}
+    // },
+    // nailthumb: {
+    // },
+    // tagsInput: {
+    //     'height':'100px',
+    //     'width':'500px'
+    // }
+});
 
 
 

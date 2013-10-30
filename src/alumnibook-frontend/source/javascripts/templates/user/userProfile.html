@@ -19,17 +19,22 @@
                     </p>
                 </h3>
                 <div ng-if="profile.current_user_following != null">
-                    <div class="btn btn-success btn-sm" ng-if="profile.current_user_following == false" ng-click="follow()">follow</div>
-                    <div class="btn btn-default btn-sm" ng-if="profile.current_user_following == true" ng-click="unfollow()">unfollow</div>
+                    <div class="btn btn-success btn-sm ladda-button" id="ladda-follow" data-style="expand-right" ladda data-ng-model="loading" ng-if="profile.current_user_following == false" ng-click="follow()">follow</div>
+                    <div class="btn btn-default btn-sm ladda-button" id="ladda-unfollow" data-style="expand-right" ladda data-ng-model="loading" ng-if="profile.current_user_following == true" ng-click="unfollow()">unfollow</div>
                 </div>
             </div>
 
             <div class="alert alert-danger" ng-show="error.message">{{error.message}}</div>
             
-            <p><strong>Email : </strong> {{profile.email}}</p>
+            <div class="public-info">
+                <p><strong>Email : </strong> {{profile.email}}</p>
+                <div class="user-avatar-wrapper pull-right" ng-show="profile.avatar">
+                    <img src="{{apiRoot+profile.avatar}}" class="img-user-avatar img-thumbnail">
+                </div>
+            </div>
 
-            <div class="page-header" ng-show="profile.profile">
-                <h4 class="text-right">Personal profile</h4>
+            <div class="page-header header-personal-profile" ng-show="profile.profile">
+                <h4 class="">Personal profile</h4>
             </div>
             <p ng-show="profile.profile.first_name"><strong>Name : </strong> {{profile.profile.first_name}} {{profile.profile.last_name}}</p>
             <p ng-show="profile.profile.phone"><strong>Phone number : </strong> {{profile.profile.phone}}</p>

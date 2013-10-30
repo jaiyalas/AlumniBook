@@ -17,6 +17,8 @@
     "magnific-popup": ">=0.9.5",
     "jquery.nailthumb": "https://github.com/garralab/NailThumb.git",
     "ng-tags-input": "*",
-    "Ladda": "*"
+    "Ladda": "*",
+    "dropzone": "*",
+    "jquery-backstretch": "*"
   }
 }
