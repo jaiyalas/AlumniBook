@@ -2,6 +2,7 @@
 //= require components/jquery-backstretch/jquery.backstretch.min
 //= require components/Ladda/dist/spin.min
 //= require components/Ladda/dist/ladda.min
+//= require components/moment/moment.min
 
 
 //= require components/angular/angular.min
@@ -11,6 +12,7 @@
 //= require components/angular/jq
 //= require components/angular/ui-bootstrap-tpls.min
 //= require components/angular/loading-bar.min
+//= require components/angular-moment/angular-moment.min
 
 //= require components/dropzone/downloads/dropzone.min
 

@@ -1,4 +1,6 @@
-var app = angular.module('sdmApp', ['ngRoute','chieffancypants.loadingBar', 'ngAnimate', 'ui.jq', 'ui.bootstrap', 'ngCookies']);
+var app = angular.module('sdmApp', ['ngRoute','chieffancypants.loadingBar', 
+                                    'ngAnimate', 'ui.jq', 'ui.bootstrap', 
+                                    'ngCookies', 'angularMoment']);
 
 $(document).on('ready page:load page:change', function() {
     if (window.location.hash == '#_=_'){

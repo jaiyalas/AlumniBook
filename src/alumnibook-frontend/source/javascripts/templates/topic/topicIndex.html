@@ -24,7 +24,27 @@
 
         <div class="col-md-4">
             <div class="page-header">
-                <h4>Popular Topic</h4>
+                <h4>IM News</h4>
+            </div>
+            <div class="well">
+                <a href="http://exp.management.ntu.edu.tw/IM">http://exp.management.ntu.edu.tw/IM</a>
+            </div>
+            <div class="page-header">
+                <h4>New Members</h4>
+            </div>
+            <div class="list-group">
+              <a href="#/users/{{user.main_id}}" class="list-group-item" ng-repeat="user in recentUsers">
+                <div class="row">
+                    <div class="col-md-11">
+                        <!-- <h4 class="list-group-item-heading">{{user.username}}</h4> -->
+                        <p class="list-group-item-text" ng-if="user.username"><strong>{{user.username}}</strong> <small>- {{user.main_id}}</small><span class="badge pull-right">{{user.followers_count}}</span></p>
+                        <p class="list-group-item-text" ng-if="!user.username"><strong>{{user.main_id}}</strong><span class="badge pull-right">{{user.followers_count}}</span></p>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="label label-info pull-right">{{topic.comments_count}}</span>
+                    </div>
+                </div>
+              </a>
             </div>
         </div>
     </div>

@@ -7,6 +7,13 @@ app.controller('TopicIndexController', function($scope, $http, cfpLoadingBar, us
         console.log(data);
         $scope.topics = data.reverse();
     });
+
+    $http.get($scope.apiRoot+'/api/users/recent', {}).success(function(data){
+        console.log(data);
+        $scope.recentUsers = data;
+    });
+
+
 });
 
 app.controller('TopicShowController', function($scope, $routeParams, $http, cfpLoadingBar, userAuthFactory){

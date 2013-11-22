@@ -25,7 +25,6 @@
     "commit": "b9a96f872e535f1e31fa7868be14940d0e00271f"
   },
   "_source": "git://github.com/srobbin/jquery-backstretch.git",
-  "_target": "~2.0.4",
-  "_originalSource": "jquery-backstretch",
-  "_direct": true
+  "_target": "*",
+  "_originalSource": "jquery-backstretch"
 }

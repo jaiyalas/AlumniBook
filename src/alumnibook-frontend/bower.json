@@ -19,6 +19,7 @@
     "ng-tags-input": "*",
     "Ladda": "*",
     "dropzone": "*",
-    "jquery-backstretch": "*"
+    "jquery-backstretch": "*",
+    "angular-moment": "*"
   }
 }

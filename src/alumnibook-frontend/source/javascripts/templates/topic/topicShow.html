@@ -5,9 +5,11 @@
         <div class="col-md-8 col-md-offset-1">
             <div class="page-header">
                 <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}"><strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></a></h4>
+                <p class="text-muted" am-time-ago="topic.created_at"></p>
             </div>
             <p class="show-topic-content">{{topic.content}}</p>
-            <p>{{topic.created_at}}</p>
+            <p>{{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+            
 
             <div class="panel panel-default">
               <div class="panel-body">
