@@ -5,7 +5,14 @@ app.controller('TopicIndexController', function($scope, $http, cfpLoadingBar, us
     $http.get($scope.apiRoot+'/api/topics', {}).success(function(data){
         cfpLoadingBar.complete();
         console.log(data);
-        $scope.topics = data.reverse();
+        $scope.topics = data;
+        angular.forEach($scope.topics, function(topic, index){
+            if(topic.content.length > 100){
+                topic.content = topic.content.substring(0,100);
+                topic.content = topic.content + ' ......';
+            }
+            // $scope.topics[index] = $scope.topics[index].substring(0,100);
+        });
     });
 
     $http.get($scope.apiRoot+'/api/users/recent', {}).success(function(data){
@@ -16,21 +23,77 @@ app.controller('TopicIndexController', function($scope, $http, cfpLoadingBar, us
 
 });
 
-app.controller('TopicShowController', function($scope, $routeParams, $http, cfpLoadingBar, userAuthFactory){
+app.controller('TopicShowController', function($scope, $routeParams, $http, $timeout, cfpLoadingBar, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
-
-    cfpLoadingBar.inc();
     $scope.topicId = $routeParams.topicId;
     $scope.comment = {};
 
     $scope.updateTopic = function(){
-        $http.get($scope.apiRoot+'/api/topics/'+$scope.topicId, {}).success(function(data){
-            console.log(data);
-            $scope.topic = data;
+        cfpLoadingBar.inc();
+        $http({
+            method: 'GET',
+            url: $scope.apiRoot+'/api/topics/'+$scope.topicId,
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response);
+            $scope.topic = response;
             cfpLoadingBar.complete();
+        }).error(function(response){
+            console.log(response);
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
         });
     };
     $scope.updateTopic();
+
+
+    $scope.follow = function(){
+        $scope.loading = true;
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/topics/follow',
+            data: {topic_id: $scope.topic.id},
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response);
+            $scope.topic = response;   
+            $scope.loading = false;
+        }).error(function(response){
+            console.log(response);
+            $scope.loading = false;
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
+        });
+    };
+
+    $scope.unfollow = function(){
+        $scope.loading = true;
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/topics/unfollow',
+            data: {topic_id: $scope.topic.id},
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response); 
+            $scope.topic = response;   
+            $scope.loading = false;     
+            
+        }).error(function(response){
+            console.log(response);
+            $scope.loading = false;
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
+        });
+    };
+
+
 
     $scope.submitComment = function(){
         if($scope.comment.comment){
@@ -47,13 +110,9 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, cfpL
                 headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
             }).then(function(response){
                 console.log(response);
-                cfpLoadingBar.inc();
-                $http.get($scope.apiRoot+'/api/topics/'+$scope.topicId, {}).success(function(data){
-                    console.log(data);
-                    $scope.topic = data;
-                    $scope.loading = false;
-                    cfpLoadingBar.complete();
-                });
+                $scope.loading = false;
+                $scope.updateTopic();
+
                 $scope.comment = {};
             });
 

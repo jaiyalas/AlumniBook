@@ -6,17 +6,29 @@
             <div class="page-header">
                 <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}"><strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></a></h4>
                 <p class="text-muted" am-time-ago="topic.created_at"></p>
+                <div class="col-md-2 pull-right">
+                    <span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span>
+                    <span class="label label-warning pull-right"><span class="glyphicon glyphicon-star"></span> {{topic.followers_count}}</span>
+                </div>
+                <div ng-if="topic.current_user_following != null">
+                    <div class="btn btn-success btn-sm ladda-button" id="ladda-follow" data-style="expand-right" ladda data-ng-model="loading" ng-if="topic.current_user_following == false" ng-click="follow()">subscribe</div>
+                    <div class="btn btn-default btn-sm ladda-button" id="ladda-unfollow" data-style="expand-right" ladda data-ng-model="loading" ng-if="topic.current_user_following == true" ng-click="unfollow()">unsubscribe</div>
+                </div>
             </div>
             <p class="show-topic-content">{{topic.content}}</p>
             <p>{{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
             
 
             <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Comments<span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span></h3>
+              </div>
               <div class="panel-body">
                 <ul class="list-group">
                   <li class="list-group-item" ng-repeat="comment in topic.comments">
+                    <p class="text-muted text-left"><a ng-href="#/users/{{comment.user.main_id}}"><strong ng-show="comment.user.username">{{comment.user.username}} - </strong>{{comment.user.main_id}}</a>
+                      <span am-time-ago="comment.created_at"></span></p>
                     <p>{{comment.comment}}</p>
-                    <p class="text-muted text-right"><a ng-href="#/users/{{comment.user.main_id}}"><strong ng-show="comment.user.username">{{comment.user.username}} - </strong>{{comment.user.main_id}}</a></p>
                 </li>
                 </ul>
               </div>

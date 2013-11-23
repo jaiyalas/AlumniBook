@@ -39,6 +39,10 @@ h1, h2, h3, h4, label, input {
 .public-info p{
     display: inline;
 }
+
+.navbar-brand {
+  font-weight: 400;
+}
 /*.img-user-avatar {
     min-width: 200px;
     min-height: 200px;
