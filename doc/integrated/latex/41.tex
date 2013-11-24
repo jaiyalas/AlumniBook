@@ -1,6 +1,6 @@
 \subsection{系統概述}
 
-本系統包含兩個主要的使用情境：使用者個人資訊與情報的建立與管理以及成員之間的資訊流通與互動論壇。兩者之使用情境如圖~\ref{pic:use:userLogin} 與圖~\ref{pic:use:forum}。
+本系統包含兩個主要的使用情境：「使用者個人資訊與情報的建立與管理」以及「成員之間的互動論壇」。兩者之使用情境如圖~\ref{pic:use:userLogin} 與圖~\ref{pic:use:forum}。
 
 \begin{figure}[H]
 \centering
@@ -58,6 +58,8 @@
 \subsubsection{搜尋模組}
 本系統為了建立一個適合使用者相互溝通之平台，必須提供使用者方便互相連結之功能，搜尋模組正是為了此需求所建立。當使用者在討論區中產生對特定用戶之好奇心，便可藉由本模組使用特定資料(如:學號)做為索引找到該用戶之公開資訊。公開程度將依該用戶之隱私設定做限制，若該用戶認為預設之帳號類別方式無法達成所欲之特殊公開之組合則需透過朋友關係的建立來達成要求。互相成為朋友的兩人將以特別規則優於普通規則的方式優先採用該用戶所設定的特別規則觀看公開資訊。本搜尋功能將全部於前端網頁系統完成。使用者與系統之間的互動模式請參考圖~\ref{pic:seq:searchUser} ，可產出之相對網頁原形 (prototype) 如圖~\ref{pic:pro:memberList} 。
 
+除了使用者搜尋之外，如圖~\ref{pic:use:forum} 中的「文章列表頁面」以及「查看特定文章內容」等部分所描述之情境，系統也允許使用者針對文章或是文章分類去進行搜尋。與此功能相對之網頁原形 (prototype) 如圖~\ref{pic:pro:articleList} 。
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{img/useseq/stage1/seqSeqrchUser.jpg}
@@ -78,8 +80,6 @@
 \caption{Prototype -- 文章列表頁面(含搜尋功能)}
 \label{pic:pro:articleList}
 \end{figure}
-
-除了使用者搜尋之外，如圖~\ref{pic:use:forum} 中的「文章列表頁面」以及「查看特定文章內容」等部分所描述之情境，系統也允許使用者針對文章或是文章分類去進行搜尋。與此功能相對之網頁原形 (prototype) 如圖~\ref{pic:pro:articleList} 。
 
 %% ####################### %%
 \subsubsection{關係建立模組}
