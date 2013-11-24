@@ -3,11 +3,14 @@
     <div class="row">
         <div class="col-md-8">
             <div class="page-header">
-                <h4>Latest Topics</h4>
+                <h4>Topic List <small><span class="glyphicon glyphicon-list-alt"></span> {{topics.length}}</small></h4>
             </div>
+            <legend>
+                <input type="text" class="form-control" placeholder="Search topic by title" ng-model="search.title">
+            </legend>
 
             <div class="list-group">
-              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics">
+              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics | filter:search">
                 <div class="row">
                     <div class="col-md-10">
                         <h4 class="list-group-item-heading">{{topic.title}}</h4>

@@ -26,6 +26,10 @@ app.config(function ($locationProvider, $routeProvider) {
         templateUrl: './javascripts/templates/topic/topicIndex.html',
         controller: 'TopicIndexController'
     })
+    .when('/topics', {
+        templateUrl: './javascripts/templates/topic/topicList.html',
+        controller: 'TopicListController'
+    })
     .when('/topics/create', {
         templateUrl: './javascripts/templates/topic/topicCreate.html',
         controller: 'TopicCreateController',
@@ -69,6 +73,10 @@ app.config(function ($locationProvider, $routeProvider) {
     .when('/users/:id', {
         templateUrl: './javascripts/templates/user/userProfile.html',
         controller: 'UserProfileController'
+    })
+    .when('/users', {
+        templateUrl: './javascripts/templates/user/userList.html',
+        controller: 'UserListController'
     })
     .otherwise({
         template: "This doesn't exist!"

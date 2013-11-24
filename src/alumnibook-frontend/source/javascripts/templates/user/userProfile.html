@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-1" ng-show="profile">
+        <div class="col-md-7" ng-show="profile">
 
             <div class="page-header">
                 <h3 ng-if="profile.username">{{profile.username}}<small> {{profile.main_id}}</small>
@@ -57,6 +57,25 @@
             </div>
             <p>{{profile.autobiography}}</p>
 
+        </div>
+
+        <div class="col-md-5">
+            <div class="page-header">
+                <h4>Topics from {{profile.main_id}} <small><span class="glyphicon glyphicon-list-alt"></span> {{topics.length}}</small></h4>
+            </div>
+            <div class="list-group">
+              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics">
+                <div class="row">
+                    <div class="col-md-10">
+                        <!-- <h4 class="list-group-item-heading">{{user.username}}</h4> -->
+                        <p class="list-group-item-text"><strong>{{topic.title}}</strong> <small class="text-muted" am-time-ago="topic.created_at"></small></p>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{topic.followers_count}}</span>
+                    </div>
+                </div>
+              </a>
+            </div>
         </div>
     </div>
 </div>

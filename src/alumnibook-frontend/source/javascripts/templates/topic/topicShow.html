@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-8" ng-if="topic">
             <div class="page-header">
                 <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}"><strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></a></h4>
                 <p class="text-muted" am-time-ago="topic.created_at"></p>
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <p class="show-topic-content">{{topic.content}}</p>
-            <p>{{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
+            <p>Created at : {{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
             
 
             <div class="panel panel-default">
@@ -39,6 +39,31 @@
               </div>
             </div>
 
+        </div>
+
+        <div class="col-md-4">
+            <div class="page-header">
+                <h4>IM News</h4>
+            </div>
+            <div class="well">
+                <a href="http://exp.management.ntu.edu.tw/IM">http://exp.management.ntu.edu.tw/IM</a>
+            </div>
+            <!-- <div class="page-header">
+                <h4>New Members</h4>
+            </div>
+            <div class="list-group">
+              <a href="#/users/{{user.main_id}}" class="list-group-item" ng-repeat="user in recentUsers">
+                <div class="row">
+                    <div class="col-md-11">
+                        <p class="list-group-item-text" ng-if="user.username"><strong>{{user.username}}</strong> <small>- {{user.main_id}}</small><span class="badge pull-right">{{user.followers_count}}</span></p>
+                        <p class="list-group-item-text" ng-if="!user.username"><strong>{{user.main_id}}</strong><span class="badge pull-right">{{user.followers_count}}</span></p>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="label label-info pull-right">{{topic.comments_count}}</span>
+                    </div>
+                </div>
+              </a>
+            </div> -->
         </div>
     </div>
 </div>

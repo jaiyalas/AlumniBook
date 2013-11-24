@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-1">
+        <div class="col-md-8">
             <div class="page-header">
                 <h3 class="text-right">Edit your profile<small></small></h3>
             </div>
@@ -110,6 +110,7 @@
 
 
               <button type="submit" class="btn btn-primary ladda-button pull-right" data-style="expand-right" id="save-submit" ladda data-ng-model="loading"><span class="ladda-label"><span class="glyphicon glyphicon-floppy-disk"></span> Save</span></button>
+              <a href="#/users/{{user.main_id}}" class="btn btn-default pull-left"> Cancel</a>
             </form>
         </div>
     </div>
