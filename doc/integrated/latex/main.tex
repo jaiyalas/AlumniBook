@@ -135,10 +135,28 @@
 \end{itemize}
 
 %% ++++++++++++++++++++++++++++++
-\section{解決方案}
+\section{系統設計}
 
+% 系統架構
 \input{41.tex}
+
+% 資料庫架構
 \input{42.tex}
+
+\subsection{軟工議題}
+\subsubsection{設計模式}
+
+本系統實作時將使用下述三種設計模式 (design pattern)。
+
+\paragraph{Model-View-Controller}
+
+本系統採用 Ruby on Rails 作為主要伺服器端開發架構，Ruby on Rails 是一套建基於 MVC 架構上之網站開發平台。
+
+\paragraph{Adapter}
+
+\paragraph{Observer}
+
+
 
 \subsection{使用套裝軟體及開發工具、程式語言}
 本系統採用 Ruby on Rails 作為主要伺服器端開發架構，使用 Ruby 2.0.0-p247 版本，Rails 4.0.0 版本，以 Grape 這個 Ruby REST-like API micro-framework 建立起主要 API server，提供網頁端與手機 JSON API，連結 MySQL(5.5.29) 資料庫儲存索取更新並維持資料正確與一致性，前端網頁頁面以 HTML5(HTML, CSS, JavaScript) 撰寫而成，採用Angular.js(1.2.0) 一個前端 JavaScript MVC 架構增加程式碼模組化與維護性，使用介面以 Bootstrap(3.0.0) 作為主要網頁前端外觀元件框架，加速雛形開發。

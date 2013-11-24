@@ -1,17 +1,17 @@
-\subsection{資料庫架構}
+\subsection{資料庫規劃}
 
 本節將會介紹本系統所需之資料模型與資料庫設計概念。本系統具有兩個相對複雜且重複性高的功能：「關注」與「留言」；更甚者，此二功能都是未來有可能因為各自牽涉之主體有所異動而需要擴充的部份，因此將此二者予以抽象化就是一項重要的工作。圖~\ref{pic:data:followability} 與圖~\ref{pic:data:commentability} 分別對應上述兩項功能的抽象資料模型。可以看到兩圖的樣式非常接近，因此更進一步的抽象化是可能的。但是考量到可能之系統規模之後，為了避免過度設計 (over-design) 這邊就不予以進行更進一步之抽象化。另一方面兩圖中灰色的部份是未來可擴充之部分，但是同樣因為系統規模與時程考量而不予實作。
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.05\textwidth]{img/followability_real.pdf}
+\includegraphics[width=1.05\textwidth]{img/datamodel/followability_real.pdf}
 \caption{Data Model -- Followability Model}
 \label{pic:data:followability}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.05\textwidth]{img/commentability.pdf}
+\includegraphics[width=1.05\textwidth]{img/datamodel/commentability.pdf}
 \caption{Data Model -- Commentability Model}
 \label{pic:data:commentability}
 \end{figure}
@@ -33,7 +33,7 @@
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.05\textwidth]{img/user.pdf}
+\includegraphics[width=1.05\textwidth]{img/datamodel/user.pdf}
 \caption{Data Model -- User Model}
 \label{pic:data:user}
 \end{figure}
@@ -50,7 +50,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{img/user2user.pdf}
+\includegraphics[width=0.85\textwidth]{img/datamodel/user2user.pdf}
 \caption{Data Model -- Following and Friendship Model}
 \label{pic:data:user2user}
 \end{figure}
@@ -61,7 +61,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{img/article.pdf}
+\includegraphics[width=0.6\textwidth]{img/datamodel/article.pdf}
 \caption{Data Model -- Article Model}
 \label{pic:data:article}
 \end{figure}
@@ -79,7 +79,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{img/comment2article.pdf}
+\includegraphics[width=0.85\textwidth]{img/datamodel/comment2article.pdf}
 \caption{Data Model -- Comment Model}
 \label{pic:data:comment2article}
 \end{figure}
@@ -97,7 +97,7 @@
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{img/user2article.pdf}
+\includegraphics[width=0.85\textwidth]{img/datamodel/user2article.pdf}
 \caption{Data Model -- Subscription Model}
 \label{pic:data:user2article}
 \end{figure}
