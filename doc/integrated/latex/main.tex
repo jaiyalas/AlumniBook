@@ -1,13 +1,16 @@
 %!TEX TS-program = xelatex
 \documentclass[11pt]{article}
 
-\usepackage[a4paper,top=2cm, bottom=1.5cm, left=2cm, right=2cm]{geometry}
+\usepackage[a4paper,top=2.5cm, bottom=2.5cm, left=3cm, right=3cm]{geometry}
 
 \usepackage{fontspec}
-\usepackage{xeCJK} 
+\usepackage{xeCJK}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{multirow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks,linkcolor=NavyBlue]{hyperref}
+\usepackage{setspace}
 
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt
@@ -19,6 +22,8 @@
 \renewcommand{\figurename}{圖}
 \renewcommand{\tablename}{表}
 
+\renewcommand{\baselinestretch}{1.2}
+
 \begin{document}
 
 \begin{center}{\Huge AlumniBook} {G3} \end{center}
@@ -27,8 +32,9 @@
 \begin{tabular}{cccc}
 郗昀彥 R00725051&郭瀚智 R02725023&鄭立民 R02725041&李奕德 B99705021 \\
 張凱涵 B00705027&施淮振 B00705047&倪嘉銘 T02705102&
-\end{tabular}
-\noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
+\end{tabular} 
+\vskip 1cm
+\noindent\makebox[\linewidth]{\rule{\linewidth}{1pt}}
 \end{center}
 
 \tableofcontents
@@ -81,31 +87,31 @@
 \begin{tabular}{ | l | l | l | }
 \hline
 功能模組 & 功能需求 & 功能範圍 \\ \hline \hline
-\multirow{3}{*}{登入模組} 
+\multirow{3}{*}{登入模組}
 & 輸入身分 & 讓使用者宣稱自己的身分\\
 & 身分認證 & 透過計中做身分認證 \\
 & 取得token & 回收計中回傳的 token \\ \hline
-\multirow{6}{*}{個人資料管理模組} 
+\multirow{6}{*}{個人資料管理模組}
 & 管理公開資料 & 讓使用者維護帳號的公開資訊 \\
 & 管理個人聯絡資料& 讓使用者維護帳號的聯絡資料\\
 & 職業生涯資料管理& 讓使用者維護職業生涯相關資料 \\
 & 隱私權管理& 讓使用者管理帳號之公開性選項 \\
 & 關係管理& 讓使用者管理與其他帳號之間的關係 \\
 & 儲存資料異動& 儲存任何使用者新增/修改/刪除之資料 \\ \hline
-\multirow{2}{*}{搜尋模組} 
+\multirow{2}{*}{搜尋模組}
 & 搜尋特定使用者 & 依照指定學號搜尋符合帳號 \\
 & 回傳指定使用者 & 依照指定學號回傳符合條件之帳號 \\ \hline
- \multirow{3}{*}{關係建立模組} 
-& 傳送使用者好友要求 & 由被要求者決定是否成為該用戶之朋友 \\ 
-& 記錄使用者對於要求之回應 & 提供被要求者回應交友要求 \\
-& 記錄使用者與其他用戶之友好狀況 & 儲存所有與該使用者為好友關係的連結 \\ \hline
+ \multirow{3}{*}{關係建立模組}
+& 傳送使用者好友要求 & 由被要求者決定是否成為該用戶之朋友 \\
+& 記錄使用者對要求之回應 & 提供被要求者回應交友要求 \\
+& 記錄使用者之友好狀況 & 儲存所有與該使用者為好友關係的連結 \\ \hline
 \multirow{4}{*}{討論區模組}
 & 新增議題 & 讓使用者以自己的帳號新增議題 \\
 & 瀏覽議題 & 讓使用者流覽系統中之議題 \\
 & 標示議題類別 & 讓使用者清楚了解顯示的議題之標籤 \\
 & 管理議題 & 系統管理者確認類別系統正常運作 \\ \hline
 \multirow{3}{*}{訂閱模組}
-& 訂閱使用者 & 讓使用者關注其他使用者在系統中的發文 \\
+& 訂閱使用者 & 讓使用者關注其他使用者之發文 \\
 & 訂閱議題 & 讓使用者關注特定議題的後續發展 \\
 & 訂閱議題類別 & 讓使用者關注特定議題類別的新增議題 \\ \hline
 \multirow{2}{*}{使用者列表}
@@ -132,10 +138,11 @@
 \section{解決方案}
 
 \input{41.tex}
+\input{42.tex}
 
 \subsection{使用套裝軟體及開發工具、程式語言}
 本系統採用 Ruby on Rails 作為主要伺服器端開發架構，使用 Ruby 2.0.0-p247 版本，Rails 4.0.0 版本，以 Grape 這個 Ruby REST-like API micro-framework 建立起主要 API server，提供網頁端與手機 JSON API，連結 MySQL(5.5.29) 資料庫儲存索取更新並維持資料正確與一致性，前端網頁頁面以 HTML5(HTML, CSS, JavaScript) 撰寫而成，採用Angular.js(1.2.0) 一個前端 JavaScript MVC 架構增加程式碼模組化與維護性，使用介面以 Bootstrap(3.0.0) 作為主要網頁前端外觀元件框架，加速雛形開發。
 \subsection{系統環境需求}
-目前Ruby on Rails Server架設在 Heroku 一個雲端應用平台，提供高度延展性，以亞馬遜 AWS EC2 為基礎建構而成的伺服器叢集，使用 git 上傳即可快速部屬，伺服器主要需要運行在 Ruby 2.0.0 與 Rails4.0.0 環境下。網頁前端頁面則放置在 Http server (如 Apache, Nginx) 下，並與 MySQL 資料庫放在資管系主機。前端網頁則相容於多數瀏覽器 (Chrome, Safari, Firefox…)，提供使用者多樣的使用選擇。
+目前Ruby on Rails Server架設在 Heroku 一個雲端應用平台，提供高度延展性，以亞馬遜 AWS EC2 為基礎建構而成的伺服器叢集，使用 git 上傳即可快速部屬，伺服器主要需要運行在 Ruby 2.0.0 與 Rails4.0.0 環境下。網頁前端頁面則放置在 Http server (如 Apache, Nginx) 下，並與 PostgreSQL 資料庫放在資管系主機。前端網頁則相容於多數瀏覽器 (Chrome, Safari, Firefox…)，提供使用者多樣的使用選擇。
 
 \end{document}

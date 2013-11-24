@@ -10,9 +10,9 @@
 \item{身分認證}
 \item{取得回傳之 token 並解構}
 \end{itemize}
-在宣稱身分的地方必須由使用者宣稱自己的身分並提供相關認證資料，在經由計算機中心所提供之 single sign-on 之服務完成身分認證之後，回傳給系統一組經認證的特定格式之 Token。若使用者為初次登入本系統，則此 Token 在經系統解構之後必須能夠抽取部分必要資料填入系統之資料庫中做為使用者個基礎資訊。此行為將於前端網頁系統中完成，若有需要填入時則會交由後端資料系統負責。使用者與系統之間的互動模式請參考圖~\ref{pic:seq:login}。
+在宣稱身分的地方必須由使用者宣稱自己的身分並提供相關認證資料，在經由計算機中心所提供之 single sign-on 之服務完成身分認證之後，回傳給系統一組經認證的特定格式之 Token。若使用者為初次登入本系統，則此 Token 在經系統解構之後必須能夠抽取部分必要資料填入系統之資料庫中做為使用者個基礎資訊。此行為將於前端網頁系統中完成，若有需要填入時則會交由後端資料系統負責。使用者與系統之間的互動請參考圖~\ref{pic:seq:login}。
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{img/seq01.png}
 \caption{Sequence Diagram -- 首頁登入}
@@ -21,29 +21,21 @@
 
 %% ####################### %%
 \subsubsection{個人資料管理模組}
-個人資料管理模組將負責管理每個使用者各自的資料組，此資料組中包含使用者的公開資料、個人連絡資料、職業生涯相關資料與隱私權管理及關係管理。使用者必須能夠看見目前系統內的資料狀況並且能夠更動大部分的資料，其中如學號等等的則必須要經過系統管理者之認證後方可變更。此更改之行為將於前端網頁系統中完成，若有資料必須儲存則會交由後段資料系統負責。使用情境請參考圖~\ref{pic:use:userLogin}，使用者與系統之間的互動模式請參考圖~\ref{pic:seq:login} 與圖~\ref{pic:seq:profileMgt}。
+\label{sssec:userprofile}
+個人資料管理模組將負責管理每個使用者各自的資料組，此資料組中包含使用者的公開資料、個人連絡資料、職業生涯相關資料與隱私權管理及關係管理。使用者必須能夠看見目前系統內的資料狀況並且能夠更動大部分的資料，其中如學號等等的則必須要經過系統管理者之認證後方可變更。此更改之行為將於前端網頁系統中完成，若有資料必須儲存則會交由後段資料系統負責。使用情境請參考圖~\ref{pic:use:userLogin}，使用者與系統之間的互動請參考圖~\ref{pic:seq:login} 與圖~\ref{pic:seq:profileMgt}。
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{img/use01.png}
 \caption{Use Case Diagram -- 使用者資訊管理}
 \label{pic:use:userLogin}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{img/seq02.png}
 \caption{Sequence Diagram -- 個人資訊管理與個人資訊修改}
 \label{pic:seq:profileMgt}
-\end{figure}
-
-使用者資料之資料庫模型如圖~\ref{pic:data:user} 所示。
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.85\textwidth]{img/user.pdf}
-\caption{Data Model -- User Model}
-\label{pic:data:user}
 \end{figure}
 
 %% ####################### %%
@@ -59,6 +51,7 @@
 
 %% ####################### %%
 \subsubsection{關係建立模組}
+\label{sssec:following}
 本系統中基於完成使用者之特定隱私權設計之理念，將在系統中提供建立好友關系的功能，也就是本模組的核心。本模組必須要能傳遞使用者教朋友的邀請、記錄使用者對於要求的回應與記錄使用者與其他用戶之關係。使用情境請參考圖~\ref{pic:use:userLogin}。
 
 %% ####################### %%
@@ -73,24 +66,9 @@
 
 %% ####################### %%
 \subsubsection{訂閱模組}
+\label{sssec:subscription}
 訂閱模組中包含訂閱使用者、訂閱議題及訂閱議題類別等三種功能。訂閱之行為一致為當訂閱之目標有了內容之新增與改變時，將由後端信件系統發信至訂閱人所登記之信箱提醒使用者。訂閱使用者的訂閱對象為本系統之其他使用者，資料的改變為新增議題等行為。訂閱議題的訂閱隊項為單篇議題，訂閱方法可包括在該議題留言或是點選訂閱按鈕，資料的改變為該議題被新增了評論時提醒。訂閱議題類別則將在任何一篇議題被標示為該類別時提醒使用者。本模組需由前端網頁系統展現、後端資料系統記錄與後端郵件系統共同合作完成。
 
-為了系統擴充性，本系統首先採用抽象資料模型如圖~\ref{pic:data:followability} 來描述「關注」的概念。圖中灰色的部份是未來可擴充之部分，但是本模組因為技術能力問題予以省略。預設的物件 (objects) 包含使用者 (user) 與文件 (article)，一個條件滿足的物件可以關注 (follow) 另一個物件。關注的種類有四種：
-\begin{enumerate}
-\item{subscribe\_article\_category -- 使用者可以訂閱文章分類 (有新文章時會有通知)；}
-\item{subscribe\_article -- 使用者可以訂閱文章 (有新留言時會有通知)；}
-\item{friendship -- 使用者可以與使用者成為好友 (可以看到私人資訊)；}
-\item{following -- 使用者可以關注其他使用者 (被關注者發文時會有通知)。}
-\end{enumerate}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=\textwidth]{img/followability_real.pdf}
-\caption{Data Model -- Followability Model}
-\label{pic:data:followability}
-\end{figure}
-
-圖中各組件之實作方式請參考其他小節：使用者資料之資料庫模型如圖~\ref{pic:data:user}。 
 
 %% ####################### %%
 \subsubsection{使用者列表模組}
