@@ -16,10 +16,12 @@
     "jquery.lazyload": ">=1.8.5",
     "magnific-popup": ">=0.9.5",
     "jquery.nailthumb": "https://github.com/garralab/NailThumb.git",
-    "ng-tags-input": "*",
+    "ng-tags-input": "~0.1.5",
     "Ladda": "*",
     "dropzone": "*",
     "jquery-backstretch": "*",
-    "angular-moment": "*"
+    "angular-moment": "*",
+    "bootstrap-tagsinput": "~0.3.9",
+    "angular-ui-select2": "~0.0.4"
   }
 }

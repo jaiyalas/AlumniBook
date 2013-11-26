@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col-md-8" ng-if="topic">
             <div class="page-header">
-                <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}"><strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small></a></h4>
+                <h4>{{topic.title}}  <small>&nbsp&nbsp&nbspby <a ng-href="#/users/{{topic.user.main_id}}">
+                    <strong ng-show="topic.user.username">{{topic.user.username}} - </strong> {{topic.user.main_id}}</small>
+                    <a href="#/topics/{{topic.id}}/edit" class="btn btn-info btn-sm pull-right" ng-if="currentUser.data.id == topic.user.id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+                </a></h4>
                 <p class="text-muted" am-time-ago="topic.created_at"></p>
                 <div class="col-md-2 pull-right">
                     <span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span>
@@ -14,6 +17,9 @@
                     <div class="btn btn-success btn-sm ladda-button" id="ladda-follow" data-style="expand-right" ladda data-ng-model="loading" ng-if="topic.current_user_following == false" ng-click="follow()">subscribe</div>
                     <div class="btn btn-default btn-sm ladda-button" id="ladda-unfollow" data-style="expand-right" ladda data-ng-model="loading" ng-if="topic.current_user_following == true" ng-click="unfollow()">unsubscribe</div>
                 </div>
+            </div>
+            <div class="tags">
+                <a ng-repeat="tag in topic.tags" class="btn btn-success btn-sm tags-btn">{{tag.name}}</a>
             </div>
             <p class="show-topic-content">{{topic.content}}</p>
             <p>Created at : {{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
@@ -41,7 +47,7 @@
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 pull-right">
             <div class="page-header">
                 <h4>IM News</h4>
             </div>

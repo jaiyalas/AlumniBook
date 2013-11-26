@@ -13,7 +13,6 @@
 //= require components/angular/ui-bootstrap-tpls.min
 //= require components/angular/loading-bar.min
 //= require components/angular-moment/angular-moment.min
-
 //= require components/dropzone/downloads/dropzone.min
 
 //= require app/sdm_app

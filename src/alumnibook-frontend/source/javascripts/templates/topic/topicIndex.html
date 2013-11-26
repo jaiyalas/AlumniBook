@@ -13,6 +13,7 @@
                         <h4 class="list-group-item-heading">{{topic.title}}</h4>
                         <p class="list-group-item-text text-info"><small>by {{topic.user.main_id}}</small> <span class="text-muted" am-time-ago="topic.created_at"></span></p>
                         <p class="list-group-item-text">{{topic.content}}</p>
+                        <span class="label label-success label-sm" ng-repeat="tag in topic.tags">{{tag.name}}</span>
                     </div>
                     <div class="col-md-2">
                         <span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span>
@@ -24,7 +25,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 pull-right">
             <div class="page-header">
                 <h4>IM News</h4>
             </div>

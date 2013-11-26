@@ -50,3 +50,20 @@ h1, h2, h3, h4, label, input {
     width:auto;
     height: 200px; 
 }*/
+
+
+.tags {
+  margin-bottom: 10px;
+}
+
+.tags .tags-btn{
+  margin-right: 10px;
+}
+.tags .tag {
+    margin-right: 10px;
+}
+
+.tags .tag:hover {
+    color: red;
+    text-decoration: none;
+}

@@ -168,8 +168,67 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, $tim
 });
 
 
+app.controller('TopicEditController', function($scope, $routeParams, $http, $timeout, $location, cfpLoadingBar, userAuthFactory){
+    $scope.currentUser = userAuthFactory.currentUser();
+    $scope.topicId = $routeParams.topicId;
+    $scope.comment = {};
+
+    $scope.updateTopic = function(){
+        cfpLoadingBar.inc();
+        $http({
+            method: 'GET',
+            url: $scope.apiRoot+'/api/topics/'+$scope.topicId,
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(response){
+            console.log(response);
+            $scope.topic = response;
+            if($scope.topic.tags.length > 0){
+                angular.forEach($scope.topic.tags, function(tag, index){
+                    $scope.topic.tags[index] = tag.name;
+                });
+            }
+            cfpLoadingBar.complete();
+        }).error(function(response){
+            console.log(response);
+            if(response.message)
+                $scope.error.message = response.message;
+            if(response.error)
+                $scope.error.message = response.error;
+        });
+    };
+    $scope.updateTopic();
+
+    $scope.submit = function() {
+        console.log('submit');
+        $scope.loading = true;
+
+        $http({
+            method: 'POST',
+            url: $scope.apiRoot+'/api/topics/'+$scope.topicId,
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id},
+            data: {
+                title: $scope.topic.title,
+                content: $scope.topic.content,
+                tag_list: $scope.topic.tags.toString()
+            }
+        }).then(function(response){
+            console.log(response);
+            $scope.loading = false;
+            $location.path('topics/'+response.data.id);
+        });
+
+    };
+
+    
+});
+
 app.controller('TopicCreateController', function($scope, $routeParams, $http, $location, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
+    $scope.topic = {}
+    $scope.topic.tags = [];
+
     $scope.submit = function() {
         console.log('submit');
         $scope.loading = true;
@@ -185,7 +244,8 @@ app.controller('TopicCreateController', function($scope, $routeParams, $http, $l
             headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id},
             data: {
                 title: $scope.topic.title,
-                content: $scope.topic.content
+                content: $scope.topic.content,
+                tag_list: $scope.topic.tags.toString()
             }
         }).then(function(response){
             console.log(response);
@@ -194,6 +254,7 @@ app.controller('TopicCreateController', function($scope, $routeParams, $http, $l
         });
 
     };
+
 });
 
 

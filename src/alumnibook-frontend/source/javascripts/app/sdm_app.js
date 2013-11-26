@@ -48,6 +48,10 @@ app.config(function ($locationProvider, $routeProvider) {
         templateUrl: './javascripts/templates/topic/topicShow.html',
         controller: 'TopicShowController'
     })
+    .when('/topics/:topicId/edit', {
+        templateUrl: './javascripts/templates/topic/topicEdit.html',
+        controller: 'TopicEditController'
+    })
     .when('/users/login', {
         templateUrl: './javascripts/templates/user/userLogin.html',
         controller: 'UserLoginController'
@@ -258,6 +262,50 @@ app.value('uiJqConfig', {
     //     'width':'500px'
     // }
 });
+
+
+app.directive('tagManager', function() {
+    return {
+        restrict: 'E',
+        scope: { tags: '=' },
+        template:
+            '<div class="tags">' +
+                '<a ng-repeat="(idx, tag) in tags" class="tag btn btn-success btn-sm" ng-click="remove(idx)">{{tag}}</a>' +
+            '</div>' +
+            '<div class="row">' +
+            '<div class="col-xs-4">' +
+            '<input type="text" class="form-control input-sm" placeholder="Add a tag..." ng-model="new_value"></input> ' +
+            '</div>'+
+            '<a class="btn btn-info btn-sm" ng-click="add()">Add</a>' +
+            '</div>',
+        link: function ( $scope, $element ) {
+            // FIXME: this is lazy and error-prone
+            var input = angular.element( $element.children()[1] );
+            
+            // This adds the new tag to the tags array
+            $scope.add = function() {
+                $scope.tags.push( $scope.new_value );
+                $scope.new_value = "";
+            };
+            
+            // This is the ng-click handler to remove an item
+            $scope.remove = function ( idx ) {
+                $scope.tags.splice( idx, 1 );
+            };
+            
+            // Capture all keypresses
+            input.bind( 'keypress', function ( event ) {
+                // But we only care when Enter was pressed
+                if ( event.keyCode == 13 ) {
+                    // There's probably a better way to handle this...
+                    $scope.$apply( $scope.add );
+                }
+            });
+        }
+    };
+});
+
+
 
 
 
