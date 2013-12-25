@@ -1,0 +1,36 @@
+---
+title: AlumniBook
+---
+
+<?php
+require_once('/var/simplesamlphp/lib/_autoload.php');
+header("Content-Type:text/html; charset=utf-8");
+$auth = new SimpleSAML_Auth_Simple('default-sp');
+?>
+
+
+<div ng-view>
+</div>
+
+<script type="text/javascript">
+    app.run(function($rootScope, $http, $location, userAuthFactory){
+        if(window.location.hostname == 'localhost'){
+            $rootScope.apiRoot = 'http://localhost:3000';
+            // $rootScope.urlRoot = 'http://sdm.herokuapp.com';
+            $rootScope.linkRoot = '/';
+        }
+        else{
+            $rootScope.apiRoot = 'http://sdm.herokuapp.com';
+            $rootScope.linkRoot = '/~Group3/'
+        }
+
+        userAuthFactory.logout();
+        console.log(userAuthFactory.currentUser())
+    });
+</script>
+
+<?php
+    if($auth->isAuthenticated()){
+        $auth->logout('http://sdm.im.ntu.edu.tw/~Group3/');
+    }
+?>

@@ -1,0 +1,42 @@
+---
+title: AlumniBook
+---
+
+<?php
+require_once('/var/simplesamlphp/lib/_autoload.php');
+header("Content-Type:text/html; charset=utf-8");
+$auth = new SimpleSAML_Auth_Simple('default-sp');
+
+// $auth->requireAuth();
+
+if(isset($_GET['logout'])){
+        $auth->logout('http://sdm.im.ntu.edu.tw/~Group3/');
+}
+$attrs = $auth->getAttributes();
+?>
+
+<div ng-view>
+</div>
+
+
+<script type="text/javascript">
+    app.run(function($rootScope, $http, $location, userAuthFactory){
+        <?php if(!$auth->isAuthenticated()){ ?>
+        $rootScope.ssoData = {
+            uid: '',
+            sn: '',
+            givenName: '',
+            description: ''
+        };
+        userAuthFactory.logout();
+        <?php }else{ ?>
+        $rootScope.ssoData = {
+            uid: "<?php echo $attrs['uid'][0] ?>",
+            sn: "<?php echo $attrs['sn'][0] ?>",
+            givenName: "<?php echo $attrs['givenName'][0] ?>",
+            description: "<?php echo $attrs['description'][0] ?>"
+        };
+        <?php } ?>
+    });
+</script>
+     

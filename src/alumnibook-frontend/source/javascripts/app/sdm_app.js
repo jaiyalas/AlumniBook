@@ -44,6 +44,10 @@ app.config(function ($locationProvider, $routeProvider) {
             }
         }
     })
+    .when('/topics/tags/:tagId', {
+        templateUrl: './javascripts/templates/topic/topicTagList.html',
+        controller: 'TopicTagListController'
+    })
     .when('/topics/:topicId', {
         templateUrl: './javascripts/templates/topic/topicShow.html',
         controller: 'TopicShowController'
@@ -55,6 +59,9 @@ app.config(function ($locationProvider, $routeProvider) {
     .when('/users/login', {
         templateUrl: './javascripts/templates/user/userLogin.html',
         controller: 'UserLoginController'
+    })
+    .when('/users/login/error', {
+        templateUrl: './javascripts/templates/user/userLoginError.html'
     })
     .when('/users/sign_up', {
         templateUrl: './javascripts/templates/user/userSignup.html',
@@ -77,6 +84,10 @@ app.config(function ($locationProvider, $routeProvider) {
     .when('/users/:id', {
         templateUrl: './javascripts/templates/user/userProfile.html',
         controller: 'UserProfileController'
+    })
+    .when('/users/:id/followers', {
+        templateUrl: './javascripts/templates/user/userFollowers.html',
+        controller: 'UserFollowersController'
     })
     .when('/users', {
         templateUrl: './javascripts/templates/user/userList.html',

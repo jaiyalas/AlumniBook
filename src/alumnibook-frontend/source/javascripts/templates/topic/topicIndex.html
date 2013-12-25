@@ -2,6 +2,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            <div class="jumbotron">
+              <h2>Welcome to AlumniBook!</h2>
+              <p><small>歡迎來到AlumniBook，即時分享與取得台大資管人的第一手資訊</small></p>
+            </div>
             <div class="page-header">
                 <h4>Latest Topics</h4>
             </div>
@@ -13,7 +17,9 @@
                         <h4 class="list-group-item-heading">{{topic.title}}</h4>
                         <p class="list-group-item-text text-info"><small>by {{topic.user.main_id}}</small> <span class="text-muted" am-time-ago="topic.created_at"></span></p>
                         <p class="list-group-item-text">{{topic.content}}</p>
-                        <span class="label label-success label-sm" ng-repeat="tag in topic.tags">{{tag.name}}</span>
+                        <div class="pull-left" ng-repeat="tag in topic.tags">
+                            <span class="label label-success label-sm" >{{tag.name}}</span>&nbsp&nbsp
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span>
@@ -40,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- <h4 class="list-group-item-heading">{{user.username}}</h4> -->
-                        <p class="list-group-item-text" ng-if="user.username"><strong>{{user.username}}</strong> <small>- {{user.main_id}}</small><span class="badge pull-right">{{user.followers_count}}</span></p>
+                        <p class="list-group-item-text" ng-if="user.username"><strong>{{user.username}}</strong> <small>- {{user.main_id}}  <strong>{{user.user_type}}</strong></small><span class="badge pull-right">{{user.followers_count}}</span></p>
                         <p class="list-group-item-text" ng-if="!user.username"><strong>{{user.main_id}}</strong><span class="badge pull-right">{{user.followers_count}}</span></p>
                     </div>
                 </div>

@@ -7,13 +7,13 @@
 
             <div class="page-header">
                 <h3 ng-if="profile.username">{{profile.username}}<small> {{profile.main_id}}</small>
-                    <small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small>
+                    <a ng-href="#/users/{{profile.main_id}}/followers"><small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small></a>
                     <p class="text-right">
                         <a href="#/users/edit" class="btn btn-info btn-sm" ng-if="currentUser.data.id == profile.id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                     </p>
                 </h3>
                 <h3 ng-if="!profile.username">{{profile.main_id}}<small></small>
-                    <small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small>
+                    <a ng-href="#/users/{{profile.main_id}}/followers"><small class="pull-right"> - follow by <span class="badge">{{profile.followers_count}}</span></small></a>
                     <p class="text-right">
                         <a href="#/users/edit" class="btn btn-info btn-sm" ng-if="currentUser.data.id == profile.id"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
                     </p>
@@ -27,7 +27,8 @@
             <div class="alert alert-danger" ng-show="error.message">{{error.message}}</div>
             
             <div class="public-info">
-                <p><strong>Email : </strong> {{profile.email}}</p>
+                <p><strong>Email : </strong> {{profile.email}}</p><br>
+                <p><strong>Type : </strong> {{profile.user_type}}</p>
                 <div class="user-avatar-wrapper pull-right" ng-show="profile.avatar">
                     <img src="{{apiRoot+profile.avatar}}" class="img-user-avatar img-thumbnail">
                 </div>
@@ -61,7 +62,7 @@
 
         <div class="col-md-5 pull-right">
             <div class="page-header">
-                <h4>Topics from {{profile.main_id}} <small><span class="glyphicon glyphicon-list-alt"></span> {{topics.length}}</small></h4>
+                <h4>Topics from {{profile.username}} <small><span class="glyphicon glyphicon-list-alt"></span> {{topics.length}}</small></h4>
             </div>
             <div class="list-group">
               <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics">
@@ -72,6 +73,40 @@
                     </div>
                     <div class="col-md-1">
                         <span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{topic.followers_count}}</span>
+                    </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="page-header">
+                <h4>{{profile.username}} following Topics <small><span class="glyphicon glyphicon-list-alt"></span> {{following_topics.length}}</small></h4>
+            </div>
+            <div class="list-group">
+              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in following_topics">
+                <div class="row">
+                    <div class="col-md-10">
+                        <!-- <h4 class="list-group-item-heading">{{user.username}}</h4> -->
+                        <p class="list-group-item-text"><strong>{{topic.title}}</strong> <small class="text-muted" am-time-ago="topic.created_at"></small></p>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{topic.followers_count}}</span>
+                    </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="page-header">
+                <h4>{{profile.username}} following Users <small><span class="glyphicon glyphicon-list-alt"></span> {{following_users.length}}</small></h4>
+            </div>
+            <div class="list-group">
+              <a href="#/users/{{user.main_id}}" class="list-group-item" ng-repeat="user in following_users">
+                <div class="row">
+                    <div class="col-md-10">
+                        <!-- <h4 class="list-group-item-heading">{{user.username}}</h4> -->
+                        <p class="list-group-item-text"><strong>{{user.username}}</strong> <small class="text-muted">- {{user.main_id}}  <strong>{{user.user_type}}</strong></small></p>
+                    </div>
+                    <div class="col-md-1">
+                        <span class="label label-warning"><span class="glyphicon glyphicon-star"></span> {{user.followers_count}}</span>
                     </div>
                 </div>
               </a>

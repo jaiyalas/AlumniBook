@@ -3,28 +3,24 @@
     <div class="row">
         <div class="col-md-8">
             <div class="page-header">
-                <h4>Members in AlumniBook <small><span class="glyphicon glyphicon-user"></span> {{users.length}}</small></h4>
+                <h4>Topic List with Tag : {{tagId}} <small><span class="glyphicon glyphicon-list-alt"></span> {{topics.length}}</small></h4>
             </div>
             <legend>
-                <input type="text" class="form-control" placeholder="Search members by Name" ng-model="search.username">
-                <input type="text" class="form-control" placeholder="Search members by ID" ng-model="search.main_id">
-                <input type="text" class="form-control" placeholder="Search members by Type" ng-model="search.user_type">
+                <input type="text" class="form-control" placeholder="Search topic by title" ng-model="search.title">
             </legend>
 
             <div class="list-group">
-              <a href="#/users/{{user.main_id}}" class="list-group-item" ng-repeat="user in users | filter:search">
+              <a href="#/topics/{{topic.id}}" class="list-group-item" ng-repeat="topic in topics | filter:search">
                 <div class="row">
                     <div class="col-md-10">
-                        <p class="list-group-item-text" ng-if="user.username">
-                            <strong>{{user.username}}</strong> <small>- {{user.main_id}}  <strong>{{user.user_type}}</strong></small>
-                        </p>
-                        <p class="list-group-item-text" ng-if="!user.username">
-                            <strong>{{user.main_id}}</strong>
-                        </p>
+                        <h4 class="list-group-item-heading">{{topic.title}}</h4>
+                        <p class="list-group-item-text text-info"><small>by {{topic.user.main_id}}</small> <span class="text-muted" am-time-ago="topic.created_at"></span></p>
+                        <p class="list-group-item-text">{{topic.content}}</p>
                     </div>
                     <div class="col-md-2">
-                        <span class="badge pull-right"><span class="glyphicon glyphicon-star"></span> {{user.followers_count}}</span>
-                        <span class="glyphicon glyphicon-star text-warning" ng-if="user.current_user_following == true"></span>
+                        <span class="label label-info pull-right"><span class="glyphicon glyphicon-comment"></span> {{topic.comments_count}}</span>
+                        <span class="label label-warning pull-right"><span class="glyphicon glyphicon-star"></span> {{topic.followers_count}}</span>
+                        <span class="glyphicon glyphicon-star text-warning" ng-if="topic.current_user_following == true"></span>
                     </div>
                 </div>
               </a>
