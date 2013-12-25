@@ -26,7 +26,7 @@
 
 \begin{document}
 
-\begin{center}{Stage-2} ~ {\Huge AlumniBook} ~ {Group-3} \end{center}
+\begin{center}{Stage-3} ~ {\Huge AlumniBook} ~ {Group-3} \end{center}
 
 \begin{center}
 \begin{tabular}{cccc}
@@ -114,12 +114,11 @@
 & 訂閱使用者 & 讓使用者關注其他使用者之發文 \\
 & 訂閱議題 & 讓使用者關注特定議題的後續發展 \\
 & 訂閱議題類別 & 讓使用者關注特定議題類別的新增議題 \\ \hline
-% \multirow{2}{*}{使用者列表}
-% & 預設顯示模組 & 顯示系統內所有使用者之公開資料 \\
-% & 過濾模組 & 依照使用者需求過濾資料後顯示 \\ \hline
-% \multirow{2}{*}{首頁}
-% & 系統公告模組 & 顯示系統公告 \\
-% & 整合模組 & 連結系上公告 \\ \hline
+\multirow{1}{*}{API模組}
+& 提供應用編程介面(API) & 使其他服務可藉由 JSON 與本系統互動 \\ \hline
+\multirow{2}{*}{行動程式}
+& 取得遠端文章資料 & 讓系統透過網路與API互動 \\
+& 顯示資料 & 將下載下來的資料呈現給使用者 \\ \hline
 \end{tabular}
 \caption{功能性需求列表}
 \label{req}
@@ -154,17 +153,35 @@
 
 \paragraph{Adapter}
 
-本系統中具有在各種不同情境時寄發通知信之功能，而電子郵件的寄送服務會是採用外部提供之軟體工具。因此本系統採用 Adapter Pattern 將外部的郵件服務以及相關設定包裝在一自製之獨立的中介介面中，而系統中其他使用郵件服務之程式片段都是使用該自製介面而非原始的外部服務。如此一來便可以簡便地對於郵件服務予以擴充或是修改，而不需要影響到整個系統中所有與郵件服務有關之程式片段。
+本系統中具有在各種不同情境時寄發通知信之功能，而電子郵件的寄送服務會是採用外部提供之軟體工具。因此本系統採用 Adapter Pattern 將外部的郵件服務以及相關設定包裝在一自製之獨立的中介介面中，而系統中其他使用郵件服務之程式片段都是使用該自製介面而非原始的外部服務。如此一來便可以簡便地對於郵件服務予以擴充或是修改，而不需要影響到整個系統中所有與郵件服務有關之程式片段。簡略的叫用關係請參考圖~\ref{pic:dp:ada}。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{img/dp/adapter.jpg}
+\caption{Design Pattern -- Adapter Pattern}
+\label{pic:dp:ada}
+\end{figure}
 
 \paragraph{Observer}
 
 Observer可以讓我們可以針對Model 的生命週期中的某些階段做出對應的行為，例如model新增、修改、查詢、刪除時，觀察者 (observers) 可以在 model 的外部進行相關的動作，model可以藉由註冊觀察者來讓觀察者監聽自己的行為，不同的model也可以註冊共用觀察者，
 
-在此系統我們使用Observer pattern來設計議題產生與留言產生時的通知，當Topic建立時，觀察者會傳送通知信給有跟隨Topic建立者的使用者，在Comment建立時，觀察者會傳送通知信給有訂閱此Comment所屬的Topic的使用者。這樣的設計模式可以有效區別Model本身的用途與外部功能，例如寄送通知信、確認信等進行外部動作時，即可使用觀察者模式來設計。
+在此系統我們使用Observer pattern來設計議題產生與留言產生時的通知，當Topic建立時，觀察者會傳送通知信給有跟隨Topic建立者的使用者，在Comment建立時，觀察者會傳送通知信給有訂閱此Comment所屬的Topic的使用者。這樣的設計模式可以有效區別Model本身的用途與外部功能，例如寄送通知信、確認信等進行外部動作時，即可使用觀察者模式來設計。實作上，類別之間的關係請參考圖~\ref{pic:dp:obs}。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{img/dp/observer.jpg}
+\caption{Design Pattern -- Observer Pattern}
+\label{pic:dp:obs}
+\end{figure}
 
 \subsection{使用套裝軟體及開發工具、程式語言}
 本系統採用 Ruby on Rails 作為主要伺服器端開發架構，使用 Ruby 2.0.0-p247 版本，Rails 4.0.0 版本，以 Grape 這個 Ruby REST-like API micro-framework 建立起主要 API server，提供網頁端與手機 JSON API，連結 MySQL(5.5.29) 資料庫儲存索取更新並維持資料正確與一致性，前端網頁頁面以 HTML5(HTML, CSS, JavaScript) 撰寫而成，採用Angular.js(1.2.0) 一個前端 JavaScript MVC 架構增加程式碼模組化與維護性，使用介面以 Bootstrap(3.0.0) 作為主要網頁前端外觀元件框架，加速雛形開發。
+
+手機端的系統目前採用 Android 系統，相容於幾乎任何版本。由於資料量有限所以並沒有儲存至 Database 。若未來有儲存的需求則會使用 SQLite database 搭配名為 GreenDao 的第三方程式來管理。
 \subsection{系統環境需求}
-目前Ruby on Rails Server架設在 Heroku 一個雲端應用平台，提供高度延展性，以亞馬遜 AWS EC2 為基礎建構而成的伺服器叢集，使用 git 上傳即可快速部屬，伺服器主要需要運行在 Ruby 2.0.0 與 Rails4.0.0 環境下。網頁前端頁面則放置在 Http server (如 Apache, Nginx) 下，並與 PostgreSQL 資料庫放在資管系主機。前端網頁則相容於多數瀏覽器 (Chrome, Safari, Firefox…)，提供使用者多樣的使用選擇。
+目前Ruby on Rails Server架設在 Heroku 一個雲端應用平台，提供高度延展性，以亞馬遜 AWS EC2 為基礎建構而成的伺服器叢集，使用 git 上傳即可快速部屬，伺服器主要需要運行在 Ruby 2.0.0 與 Rails4.0.0 環境下。網頁前端頁面則放置在 Http server (如 Apache, Nginx) 下，並與 PostgreSQL 資料庫放在資管系主機。前端網頁則相容於多數瀏覽器 (Chrome, Safari, Firefox…)，提供使用者多樣的使用選擇。手機端在公開之後可以請使用者下載 APK 來安裝，或是在上架後透過 googleplay 下載。相容於幾乎任何版本的 Android 作業系統，使用者應不用擔心系統版本的問題。
+
+\input{well.tex}
 
 \end{document}

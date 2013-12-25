@@ -123,3 +123,36 @@
 \label{pic:seq:search}
 \end{figure}
 
+
+
+%% ####################### %%
+
+
+%% ####################### %%
+% first column
+\begin{minipage}[t]{0.5\textwidth}
+\subsubsection{API模組}
+
+本系統基於 Grape，一個 REST-like API micro-framework，與 Ruby on Rails 整合，來提供系統 JSON API，並遵循 REST (Representational State Transfer) 的軟體架構風格實作，客戶端的應用通過 URI 來獲取資源的表徵，收取以 JSON 之資料格式來產生狀態的變化，對資源的操作包括獲取、創建、修改和刪除資源，這些操作對應於HTTP協議提供的 GET、POST、PUT 和 DELETE 方法。 以新增議題為例：當使用者需要新增議題時，透過客戶端程式來以 HTTP request Server，因為新增文章代表需創建新的資料，所以使用 POST 做為 HTTP request 的方法，並對其設定的URI（http://alumnibook.com/api/topics/）做 request，這樣 Server 就會判斷其 HTTP requset 參數來做相對應的回覆，若所夾帶參數通過檢驗即可建立新的議題，並回覆新增之議題的資料，若所夾帶參數未能通過檢驗，例如必須欄位未提供或是其資料格式錯誤，則會回傳錯誤訊息，API 所回傳的資料格式皆以 JSON 作為主要資料格式。API 最主要可以提供其他網站服務或是行動裝置端的程式使用，例如說圖~\ref{pic:seq:appi} 呈現了以手機程式為客戶端時，該服務與本系統之 API 之間可能的互動模式。
+\end{minipage}
+%second column
+\begin{minipage}[t]{0.5\textwidth}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.65\textwidth]{img/prototype/android.jpg}
+\caption{Android Screenshot -- 行動程式}
+\label{pic:app}
+\end{figure}
+\end{minipage}
+
+\subsubsection{行動程式}
+行動裝置端的程式極其輕便，僅帶來快速的文章流覽功能。手機程式的執行畫面雛形如圖~\ref{pic:app} 所示。在手機端程式啟動後，程式會向API要求資料。在接收到伺服器端所提供的JSON陣列後，手機端會做一連串的處理動作。從該JSON陣列中一項一項抽取出來的資料在成功解構後會暫時以方便取用的格式放在本機端以供未來使用，並且先將使用者列表簡單的呈現給使用者。使用者選擇有興趣的文章時則可從本機端的資料中取得該篇文章的內文、作者以及評論。手機端程式與網站 API 之間的互動細節請參考圖~\ref{pic:seq:appi}。
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{img/useseq/appi.jpg}
+\caption{Sequence Diagram -- API and Android App}
+\label{pic:seq:appi}
+\end{figure}
+
+

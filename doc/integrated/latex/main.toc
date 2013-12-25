@@ -5,21 +5,31 @@
 \contentsline {subsection}{\numberline {3.2}非功能性需求}{3}{subsection.3.2}
 \contentsline {section}{\numberline {4}系統設計}{4}{section.4}
 \contentsline {subsection}{\numberline {4.1}系統概述}{4}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}登入模組}{4}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}個人資料管理模組}{5}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.1}登入模組}{5}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}個人資料管理模組}{6}{subsubsection.4.1.2}
 \contentsline {subsubsection}{\numberline {4.1.3}搜尋模組}{6}{subsubsection.4.1.3}
 \contentsline {subsubsection}{\numberline {4.1.4}關係建立模組}{8}{subsubsection.4.1.4}
 \contentsline {subsubsection}{\numberline {4.1.5}討論區模組}{8}{subsubsection.4.1.5}
-\contentsline {subsubsection}{\numberline {4.1.6}訂閱模組}{9}{subsubsection.4.1.6}
-\contentsline {subsection}{\numberline {4.2}資料庫規劃}{10}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}個人資料管理模組}{11}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}關係建立模組}{11}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}討論區模組}{13}{subsubsection.4.2.3}
-\contentsline {subsubsection}{\numberline {4.2.4}訂閱模組}{14}{subsubsection.4.2.4}
-\contentsline {subsection}{\numberline {4.3}軟工議題}{14}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}設計模式}{14}{subsubsection.4.3.1}
-\contentsline {paragraph}{Model-View-Controller}{14}{section*.2}
-\contentsline {paragraph}{Adapter}{14}{section*.3}
-\contentsline {paragraph}{Observer}{14}{section*.4}
-\contentsline {subsection}{\numberline {4.4}使用套裝軟體及開發工具、程式語言}{15}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}系統環境需求}{15}{subsection.4.5}
+\contentsline {subsubsection}{\numberline {4.1.6}訂閱模組}{10}{subsubsection.4.1.6}
+\contentsline {subsubsection}{\numberline {4.1.7}API模組}{11}{subsubsection.4.1.7}
+\contentsline {subsubsection}{\numberline {4.1.8}行動程式}{11}{subsubsection.4.1.8}
+\contentsline {subsection}{\numberline {4.2}資料庫規劃}{12}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}個人資料管理模組}{13}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}關係建立模組}{13}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}討論區模組}{15}{subsubsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.4}訂閱模組}{16}{subsubsection.4.2.4}
+\contentsline {subsection}{\numberline {4.3}軟工議題}{17}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}設計模式}{17}{subsubsection.4.3.1}
+\contentsline {paragraph}{Model-View-Controller}{17}{section*.2}
+\contentsline {paragraph}{Adapter}{17}{section*.3}
+\contentsline {paragraph}{Observer}{17}{section*.4}
+\contentsline {subsection}{\numberline {4.4}使用套裝軟體及開發工具、程式語言}{18}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}系統環境需求}{18}{subsection.4.5}
+\contentsline {section}{\numberline {5}課程心得}{18}{section.5}
+\contentsline {subsection}{\numberline {5.1}郗昀彥 R00725051}{18}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}郭瀚智 R02725023}{18}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}鄭立民 R02725041}{18}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}李奕德 B99705021}{19}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}張凱涵 B00705027}{19}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}施淮振 B00705047}{19}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}倪嘉銘 T02705102}{19}{subsection.5.7}
