@@ -21,16 +21,16 @@
         <li class="" ng-switch-when="true"><a href="/messages"><span class="glyphicon glyphicon-comment"></span> Messages</a></li>
         <li class="" ng-switch-when="true"><a ng-href="/products/create"><span class="glyphicon glyphicon-plus"></span> Create</a></li> -->
         <li class="dropdown" ng-switch-when="true">
-          <a href="#" class="dropdown-toggle qu-dropdown" data-toggle="dropdown"> Me <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle qu-dropdown" data-toggle="dropdown"> {{currentUser.data.username}} <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="#/users/{{currentUser.data.main_id}}"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Setting</a></li>
-            <li><a ng-href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <!-- <li><a href="#"><span class="glyphicon glyphicon-wrench"></span> Setting</a></li> -->
+            <li><a href="/~Group3/logout.php" target="_self"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
           
         </li>
         <li ng-switch-when="false">
-            <a ng-href="#/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+            <a href="#/users/login" target="_self"><span class="glyphicon glyphicon-log-in"></span> Login</a>
         </li>
         <li ng-switch-default>
           <a ng-href="#" ng-click=""></a>

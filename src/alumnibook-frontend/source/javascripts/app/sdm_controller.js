@@ -1,38 +1,39 @@
 app.controller('TopicIndexController', function($scope, $http, cfpLoadingBar, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
+    console.log($scope.ssoData);
 
-    cfpLoadingBar.inc();
-    $http({
-        method: 'GET',
-        url: $scope.apiRoot+'/api/topics/recent',
-        withCredentials: true,
-        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
-    }).success(function(data){
-        cfpLoadingBar.complete();
-        console.log(data);
-        $scope.topics = data;
-        angular.forEach($scope.topics, function(topic, index){
-            if(topic.content){
-                if(topic.content.length > 100){
-                    topic.content = topic.content.substring(0,100);
-                    topic.content = topic.content + ' ......';
+    if(window.location.toString() == 'http://sdm.im.ntu.edu.tw/~Group3/#/'){
+        cfpLoadingBar.inc();
+        $http({
+            method: 'GET',
+            url: $scope.apiRoot+'/api/topics/recent',
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(data){
+            cfpLoadingBar.complete();
+            console.log(data);
+            $scope.topics = data;
+            angular.forEach($scope.topics, function(topic, index){
+                if(topic.content){
+                    if(topic.content.length > 100){
+                        topic.content = topic.content.substring(0,100);
+                        topic.content = topic.content + ' ......';
+                    }
                 }
-            }
-            // $scope.topics[index] = $scope.topics[index].substring(0,100);
+                // $scope.topics[index] = $scope.topics[index].substring(0,100);
+            });
         });
-    });
 
-    $http({
-        method: 'GET',
-        url: $scope.apiRoot+'/api/users/recent',
-        withCredentials: true,
-        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
-    }).success(function(data){
-        console.log(data);
-        $scope.recentUsers = data;
-    });
-
-
+        $http({
+            method: 'GET',
+            url: $scope.apiRoot+'/api/users/recent',
+            withCredentials: true,
+            headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+        }).success(function(data){
+            console.log(data);
+            $scope.recentUsers = data;
+        });
+    }
 });
 
 app.controller('TopicListController', function($scope, $http, cfpLoadingBar, userAuthFactory){
@@ -70,6 +71,43 @@ app.controller('TopicListController', function($scope, $http, cfpLoadingBar, use
     });
 });
 
+app.controller('TopicTagListController', function($scope, $routeParams, $http, $timeout, cfpLoadingBar, userAuthFactory){
+    $scope.currentUser = userAuthFactory.currentUser();
+    $scope.tagId = $routeParams.tagId;
+
+    cfpLoadingBar.inc();
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/topics/tags/'+$scope.tagId,
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        cfpLoadingBar.complete();
+        console.log(data);
+        $scope.topics = data;
+        angular.forEach($scope.topics, function(topic, index){
+            if(topic.content){
+                if(topic.content.length > 100){
+                    topic.content = topic.content.substring(0,100);
+                    topic.content = topic.content + ' ......';
+                }
+            }
+        });
+    });
+
+
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/recent',
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        console.log(data);
+        $scope.recentUsers = data;
+    });
+    
+});
+
 app.controller('TopicShowController', function($scope, $routeParams, $http, $timeout, cfpLoadingBar, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
     $scope.topicId = $routeParams.topicId;
@@ -101,7 +139,7 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, $tim
         $scope.loading = true;
         $http({
             method: 'POST',
-            url: $scope.apiRoot+'/api/topics/follow',
+            url: $scope.apiRoot+'/api/topics/'+$scope.topic.id+'/follow',
             data: {topic_id: $scope.topic.id},
             headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
         }).success(function(response){
@@ -122,7 +160,7 @@ app.controller('TopicShowController', function($scope, $routeParams, $http, $tim
         $scope.loading = true;
         $http({
             method: 'POST',
-            url: $scope.apiRoot+'/api/topics/unfollow',
+            url: $scope.apiRoot+'/api/topics/'+$scope.topic.id+'/unfollow',
             data: {topic_id: $scope.topic.id},
             headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
         }).success(function(response){
@@ -373,6 +411,42 @@ app.controller('UserProfileController', function($scope, $http, $location, $rout
         // });
     });
 
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/topics/users/'+$scope.userId+'/follow',
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        console.log(data);
+        $scope.following_topics = data;
+        // angular.forEach($scope.topics, function(topic, index){
+        //     if(topic.content){
+        //         if(topic.content.length > 100){
+        //             topic.content = topic.content.substring(0,100);
+        //             topic.content = topic.content + ' ......';
+        //         }
+        //     }
+        // });
+    });
+
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/'+$scope.userId+'/following',
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        console.log(data);
+        $scope.following_users = data;
+        // angular.forEach($scope.topics, function(topic, index){
+        //     if(topic.content){
+        //         if(topic.content.length > 100){
+        //             topic.content = topic.content.substring(0,100);
+        //             topic.content = topic.content + ' ......';
+        //         }
+        //     }
+        // });
+    });
+
 
     $scope.follow = function(){
         $scope.loading = true;
@@ -480,7 +554,7 @@ app.controller('UserEditController', function($scope, $http, $location, $routePa
 });
 
 
-app.controller('UserListController', function($scope, $http, cfpLoadingBar, userAuthFactory){
+app.controller('UserListController', function($scope, $http, $routeParams, cfpLoadingBar, userAuthFactory){
     $scope.currentUser = userAuthFactory.currentUser();
 
     cfpLoadingBar.inc();
@@ -493,6 +567,52 @@ app.controller('UserListController', function($scope, $http, cfpLoadingBar, user
         cfpLoadingBar.complete();
         console.log(data);
         $scope.users = data;
+    });
+
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/recent',
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        console.log(data);
+        $scope.recentUsers = data;
+    });
+
+
+});
+
+
+app.controller('UserFollowersController', function($scope, $http, $routeParams, cfpLoadingBar, userAuthFactory){
+    $scope.currentUser = userAuthFactory.currentUser();
+    $scope.userId = $routeParams['id'];
+
+    cfpLoadingBar.inc();
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/'+$scope.userId+'/followers',
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(data){
+        cfpLoadingBar.complete();
+        console.log(data);
+        $scope.users = data;
+    });
+
+    $http({
+        method: 'GET',
+        url: $scope.apiRoot+'/api/users/profile/'+$scope.userId,
+        withCredentials: true,
+        headers: {'Authorization': 'Bearer '+userAuthFactory.currentUser().data.id}
+    }).success(function(response){
+        console.log(response);
+        $scope.profile = response;
+    }).error(function(response){
+        console.log(response);
+        if(response.message)
+            $scope.error.message = response.message;
+        if(response.error)
+            $scope.error.message = response.error;
     });
 
     $http({

@@ -1,0 +1,75 @@
+---
+title: AlumniBook
+---
+
+<?php
+require_once('/var/simplesamlphp/lib/_autoload.php');
+header("Content-Type:text/html; charset=utf-8");
+$auth = new SimpleSAML_Auth_Simple('default-sp');
+$auth->requireAuth();
+$attrs = $auth->getAttributes();
+
+// if(isset($_GET['logout'])){
+//         $auth->logout('http://sdm.im.ntu.edu.tw/~Group3/');
+// }
+?>
+
+
+<div ng-view>
+</div>
+
+<script type="text/javascript">
+    app.run(function($rootScope, $http, $location, userAuthFactory){
+        if(window.location.hostname == 'localhost'){
+            $rootScope.apiRoot = 'http://localhost:3000';
+            // $rootScope.urlRoot = 'http://sdm.herokuapp.com';
+            $rootScope.linkRoot = '/';
+        }
+        else{
+            $rootScope.apiRoot = 'http://sdm.herokuapp.com';
+            $rootScope.linkRoot = '/~Group3/'
+        }
+
+
+        <?php if(!$auth->isAuthenticated()){ ?>
+        $rootScope.ssoData = {
+            uid: '',
+            sn: '',
+            givenName: '',
+            description: ''
+        };
+        window.location = 'http://sdm.im.ntu.edu.tw/~Group3/';
+        <?php }else{ ?>
+        $rootScope.ssoData = {
+            main_id: "<?php echo $attrs['uid'][0] ?>",
+            sn: "<?php echo $attrs['sn'][0] ?>",
+            givenName: "<?php echo $attrs['givenName'][0] ?>",
+            description: "<?php echo $attrs['description'][0] ?>"
+        };
+
+
+        // sync to server
+        $http({
+            method: 'POST',
+            url: $rootScope.apiRoot+'/api/users/sso/sign_up',
+            data: {
+                main_id: $rootScope.ssoData.main_id.toLowerCase(),
+                username: $rootScope.ssoData.sn + $rootScope.ssoData.givenName,
+                email: $rootScope.ssoData.main_id.toLowerCase() + '@ntu.edu.tw',
+                user_type: $rootScope.ssoData.description
+            }
+        }).success(function(response){
+            console.log(response);
+            userAuthFactory.login(response);
+            if(response['new_user'] == true){
+                window.location = 'http://sdm.im.ntu.edu.tw/~Group3/#/users/edit';
+            }else{
+                window.location = 'http://sdm.im.ntu.edu.tw/~Group3/';
+            }   
+        }).error(function(response){
+            console.log(response);
+            window.location = 'http://sdm.im.ntu.edu.tw/~Group3/#/users/login/error';
+        });
+        <?php } ?>
+    });
+</script>

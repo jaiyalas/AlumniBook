@@ -18,10 +18,11 @@
                     <div class="btn btn-default btn-sm ladda-button" id="ladda-unfollow" data-style="expand-right" ladda data-ng-model="loading" ng-if="topic.current_user_following == true" ng-click="unfollow()">unsubscribe</div>
                 </div>
             </div>
-            <div class="tags">
-                <a ng-repeat="tag in topic.tags" class="btn btn-success btn-sm tags-btn">{{tag.name}}</a>
-            </div>
             <p class="show-topic-content">{{topic.content}}</p>
+            <div class="tags">
+                <strong>標籤：</strong>
+                <a ng-href="#/topics/tags/{{tag.name}}" ng-repeat="tag in topic.tags" class="label label-success tags-btn">{{tag.name}}</a>
+            </div>
             <p>Created at : {{topic.created_at | amDateFormat:'dddd, MMMM Do YYYY, h:mm:ss a'}}</p>
             
 

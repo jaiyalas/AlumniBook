@@ -3,12 +3,10 @@
     <div class="row">
         <div class="col-md-8">
             <div class="page-header">
-                <h4>Members in AlumniBook <small><span class="glyphicon glyphicon-user"></span> {{users.length}}</small></h4>
+                <h4>{{profile.username}}'s followers<small><span class="glyphicon glyphicon-user"></span> {{users.length}}</small></h4>
             </div>
             <legend>
-                <input type="text" class="form-control" placeholder="Search members by Name" ng-model="search.username">
                 <input type="text" class="form-control" placeholder="Search members by ID" ng-model="search.main_id">
-                <input type="text" class="form-control" placeholder="Search members by Type" ng-model="search.user_type">
             </legend>
 
             <div class="list-group">
